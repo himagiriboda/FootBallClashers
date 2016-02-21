@@ -15,6 +15,7 @@ import de.footballclashers.beans.UsersDetails;
 @RequestMapping("/GroupManagement")
 public class UserGroupController {
 	
+	
 	@RequestMapping(value="/group",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void userCreation(@RequestBody UsersDetails usersData){
 		
