@@ -5,8 +5,7 @@
 	<select id="insert" parameterType="com.mybatis.spring.bean.Testing">
 		insert into testing (name,
 		address)
-		values ( #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
-		)
+		values ( #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
 	</select>
 
 </mapper>

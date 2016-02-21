@@ -5,7 +5,6 @@
 	<select id="insert" parameterType="de.footballclashers.bean.UserGroup">
 		insert into user_group (name,
 		address)
-		values ( #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}
-		)
+		values ( #{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR})
 	</select>
 </mapper>
