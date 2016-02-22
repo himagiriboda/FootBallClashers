@@ -40,5 +40,6 @@
 	</bean>
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="de.footballclashers.dao.interfaces.fbc" />
+		<property name="configLocation" value="/WEB-INF/fbc-myBatisConfig.xml" />
 	</bean>
 </beans>

@@ -31,8 +31,8 @@ public class UserGroupController {
 		return null;
 	}
 	
-	@RequestMapping(value="/AcceptingInvestigation",method=RequestMethod.POST)
-	public Sucess AcceptingInvestigation(@RequestParam(value="userId") String userId,@RequestParam(value="groupId") String groupId){
+	@RequestMapping(value="/AcceptingInvitation",method=RequestMethod.POST)
+	public Sucess AcceptingInvitation(@RequestParam(value="userId") String userId,@RequestParam(value="groupId") String groupId){
 		return null;
 	}
 	
