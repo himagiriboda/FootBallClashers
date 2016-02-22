@@ -37,8 +37,15 @@ public class UsersManagerImpl implements UsersManager{
 		users.setPassword(newPassword);
 		userMapperBasicDAO.update(users);
 	}
+	
 	public List<Users> getAllUser(){
 		return userMapperBasicDAO.getAllUser();
+	}
+	
+	public boolean isEmailAlreadyExisted(UsersDetails usersDetails){
+		Users users = userMapperBasicDAO.getUserByEmail(usersDetails);
+		if(users != null) return true;
+		return false;
 	}
 	
 }

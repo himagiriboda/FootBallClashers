@@ -10,4 +10,5 @@ public interface UsersManager {
 	public void doForGotPassword(String email);
 	public void doChangePassword(String email,String current,String newPassword);
 	public List<Users> getAllUser();
+	public boolean isEmailAlreadyExisted(UsersDetails usersDetails);
 }

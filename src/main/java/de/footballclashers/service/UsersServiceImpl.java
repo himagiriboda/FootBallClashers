@@ -14,9 +14,13 @@ public class UsersServiceImpl implements UsersService{
 
 	@Autowired
 	private UsersManager usersManager;
+	@Autowired
+	private ValidationService validationService;
 	
 	public void doUserRegistration(UsersDetails usersDetails) {
-		usersManager.doUserRegistration(usersDetails);
+		boolean flag = validationService.validateEmployee(usersDetails);
+		if(flag)
+			usersManager.doUserRegistration(usersDetails);
 	}
 	
 	public void doForGotPassword(String email){
