@@ -3,6 +3,7 @@ package de.footballclashers.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,29 +13,45 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.footballclashers.beans.Sucess;
 import de.footballclashers.beans.UsersDetails;
+import de.footballclashers.dao.model.fbc.Users;
+import de.footballclashers.service.UsersService;
+import de.footballclashers.service.ValidationService;
 
 @RestController
 @RequestMapping("/userManagement")
 public class UserController {
 	
+	@Autowired
+	private UsersService usersService;
+	
+	@Autowired
+	private ValidationService validationService;
+		
 	@RequestMapping(value="/user",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	public void userRegistration(@RequestBody UsersDetails usersData){
-		
+		usersService.doUserRegistration(usersData);
 	}
+	
 	@RequestMapping(value="/user", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<UsersDetails>  getUserDetails(){
-		List<UsersDetails> list = new ArrayList<UsersDetails>();
+	public List<Users>  getUserDetails(){
+		List<Users> list = usersService.getAllUser();
 		return list;
 	}
 	
 	@RequestMapping(value="/forGot")
 	public Sucess forGotPassword(@RequestParam(value="email") String email){
-		return null;
+		usersService.doForGotPassword(email);
+		Sucess sucess = new Sucess();
+		sucess.setStatus("Sucess");
+		return sucess;
 	}
 	
 	@RequestMapping(value="/change")
 	public Sucess changePassword(@RequestParam(value="email") String email,@RequestParam(value="current") String current,@RequestParam(value="new") String newPassword){
-		return null;
+		usersService.doChangePassword(email,current,newPassword);
+		Sucess sucess = new Sucess();
+		sucess.setStatus("Sucess");
+		return sucess;
 	}
 
 	@RequestMapping(value="/invitaions",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
@@ -46,4 +63,5 @@ public class UserController {
 	public Sucess doLogIn(@RequestParam(value="email") String email,@RequestParam(value="password") String password){
 		return null;
 	}
+	
 }

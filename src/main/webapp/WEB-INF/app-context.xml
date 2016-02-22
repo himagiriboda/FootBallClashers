@@ -36,9 +36,9 @@
 	</bean>
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<!-- property name="configLocation" value="/WEB-INF/mybatisMapper-config.xml" /-->
+		<property name="configLocation" value="/WEB-INF/mybatisMapper-config.xml" />
 	</bean>
-	<!-- bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.mybatis.spring.mapper" />
-	</bean-->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="de.footballclashers.dao.interfaces.fbc" />
+	</bean>
 </beans>

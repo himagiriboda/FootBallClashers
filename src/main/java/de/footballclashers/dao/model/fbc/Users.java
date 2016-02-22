@@ -1,19 +1,37 @@
-package de.footballclashers.beans;
+package de.footballclashers.dao.model.fbc;
 
-public class UsersDetails {
-	
+import java.io.Serializable;
+
+public class Users implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Integer id;
 	private String name;
+	private String email;
 	private String password;
 	private String social_id;
 	private byte[] avatarImage;
-	private String email;
-	private Integer points;
+	private Byte points;
 	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getPassword() {
 		return password;
@@ -33,20 +51,11 @@ public class UsersDetails {
 	public void setAvatarImage(byte[] avatarImage) {
 		this.avatarImage = avatarImage;
 	}
-	
-	public Integer getPoints() {
+	public Byte getPoints() {
 		return points;
 	}
-	public void setPoints(Integer points) {
+	public void setPoints(Byte points) {
 		this.points = points;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
-	
 	
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="de.footballclashers.dao.interfaces.fbc.UserMapperBasicDAO">
+
+	<select id="insert" parameterType="de.footballclashers.dao.model.fbc.Users">
+		insert into users (name,email,password,social_id)
+		values ( #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR},#{social_id,jdbcType=VARCHAR})
+	</select>
+	
+	<select id="update" parameterType="de.footballclashers.dao.model.fbc.Users">
+		UPDATE users
+	        SET
+	        password = #{password,jdbcType=VARCHAR}
+	        where email = #{email,jdbcType=VARCHAR}
+	</select>
+	
+		    <resultMap id="result" type="de.footballclashers.dao.model.fbc.Users">
+	        <result property="id" column="id"/>
+	        <result property="name" column="name"/>
+	        <result property="email" column="email"/>
+	        <result property="password" column="password"/>
+	        <result property="social_id" column="social_id"/>
+	        <result property="avatarImage" column="avatarImage"/>
+	        <result property="points" column="points"/>
+	        </resultMap>
+	 
+	    <select id="getAllUser" parameterType="de.footballclashers.dao.model.fbc.Users" resultMap="result">
+	        SELECT id,name,email,password,social_id,avatarImage,points FROM users;
+	    </select>
+
+</mapper>
