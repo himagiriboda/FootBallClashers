@@ -1,28 +1,32 @@
 package de.footballclashers.beans;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GroupDetails {
 
 	private int leagueId;
-	private String leagueName;
+	private String groupName;
 	private int createdBy;
-	List<Integer> userIds = null;
-
-	public List<Integer> getUserIds() {
-		return userIds;
-	}
-
-	public void setUserIds(List<Integer> userIds) {
-		this.userIds = userIds;
-	}
-
+	private String[] userIds;
+	
 	public GroupDetails() {
-		userIds = new ArrayList<Integer>();
 		// TODO Auto-generated constructor stub
 	}
 	
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public String[] getUserIds() {
+		return userIds;
+	}
+
+	public void setUserIds(String[] userIds) {
+		this.userIds = userIds;
+	}
+
 	public int getCreatedBy() {
 		return createdBy;
 	}
@@ -39,12 +43,6 @@ public class GroupDetails {
 		this.leagueId = leagueId;
 	}
 
-	public String getLeagueName() {
-		return leagueName;
-	}
-
-	public void setLeagueName(String leagueName) {
-		this.leagueName = leagueName;
-	}
+	
 
 }
