@@ -1,31 +1,48 @@
 package de.footballclashers.beans;
 
 public class GroupDetails {
+
+	private int leagueId;
+	private String groupName;
+	private int createdBy;
+	private String[] userIds;
 	
-	private Integer leagueId;
-	private String leagueName;
-	private Integer createdBy;
+	public GroupDetails() {
+		// TODO Auto-generated constructor stub
+	}
 	
-	
-	public Integer getCreatedBy() {
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+	public String[] getUserIds() {
+		return userIds;
+	}
+
+	public void setUserIds(String[] userIds) {
+		this.userIds = userIds;
+	}
+
+	public int getCreatedBy() {
 		return createdBy;
 	}
-	public void setCreatedBy(Integer createdBy) {
+
+	public void setCreatedBy(int createdBy) {
 		this.createdBy = createdBy;
 	}
-	public Integer getLeagueId() {
+
+	public int getLeagueId() {
 		return leagueId;
 	}
-	public void setLeagueId(Integer leagueId) {
+
+	public void setLeagueId(int leagueId) {
 		this.leagueId = leagueId;
 	}
-	public String getLeagueName() {
-		return leagueName;
-	}
-	public void setLeagueName(String leagueName) {
-		this.leagueName = leagueName;
-	}
+
 	
+
 }
-
-
