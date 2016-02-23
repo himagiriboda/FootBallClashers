@@ -44,10 +44,13 @@ public class UsersManagerImpl implements UsersManager{
 	}
 	
 	public boolean isEmailAlreadyExisted(UsersDetails usersDetails){
+		Users u = new Users();
+		System.out.println("Debug @ stmt :: usersDetails.getEmail()"+usersDetails.getEmail());
+		u.setEmail(usersDetails.getEmail());
 		Users users = userMapperBasicDAO.getUserByEmail(usersDetails);
 		if(users != null) 
-			return true;
-		return false;
+			return false;
+		return true;
 	}
 	
 }

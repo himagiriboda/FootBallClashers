@@ -18,11 +18,11 @@ public class GlobalExceptionController extends AbstractExceptionHandler{
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
 	public ErrorDetail emailAlreadyExistedException(EmailAlreadyExistedException exception) {
-//		String errorMessage = resourceBundle.getMessage(exception.getKeyMessage(), null, Locale.getDefault());
-//		errorMessage = new MessageFormat(errorMessage).format(new Object[]{exception.getExtraMesaage()});
+		String errorMessage = resourceBundle.getMessage(exception.getKeyMessage(), null, Locale.getDefault());
+		errorMessage = new MessageFormat(errorMessage).format(new Object[]{exception.getExtraMesaage()});
 		ErrorDetail error = new ErrorDetail();
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
-		error.setMessage(null);
+		error.setMessage(errorMessage);
 		return error;
 	}		
 	
