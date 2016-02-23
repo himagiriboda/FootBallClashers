@@ -18,12 +18,15 @@ public class UsersServiceImpl implements UsersService{
 	private ValidationService validationService;
 	
 	public void doUserRegistration(UsersDetails usersDetails) {
-		boolean flag = validationService.validateEmployee(usersDetails);
+		boolean flag = validationService.validateUser(usersDetails);
 		if(flag)
 			usersManager.doUserRegistration(usersDetails);
 	}
 	
 	public void doForGotPassword(String email){
+		UsersDetails usersDetails = new UsersDetails();
+		usersDetails.setEmail(email);
+		validationService.isUserRegisteredWithSocialID(usersDetails);
 		usersManager.doForGotPassword(email);
 	}
 	

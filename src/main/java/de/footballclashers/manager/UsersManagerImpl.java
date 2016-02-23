@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import de.footballclashers.beans.UsersDetails;
 import de.footballclashers.dao.interfaces.fbc.UserMapperBasicDAO;
 import de.footballclashers.dao.model.fbc.Users;
-import de.footballclashers.exceptions.EmailAlreadyExistedException;
+import de.footballclashers.exceptions.EmailNotExistedException;
 
 @Component
 public class UsersManagerImpl implements UsersManager{
@@ -51,6 +51,18 @@ public class UsersManagerImpl implements UsersManager{
 		if(users != null) 
 			return false;
 		return true;
+	}
+	
+	public boolean isUserRegisteredWithSocialID(UsersDetails usersDetails) throws EmailNotExistedException{
+		Users users = userMapperBasicDAO.getUserByEmail(usersDetails);
+		if(users == null){
+			throw new EmailNotExistedException("exception.Email_Not_Existed", usersDetails.getEmail());
+		}
+		if(users.getSocial_id() != null) {
+			throw new EmailNotExistedException("exception.Email_Not_Existed", usersDetails.getEmail());
+		}
+		return true;
+		
 	}
 	
 }

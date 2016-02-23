@@ -27,8 +27,12 @@ public class UserController {
 	private ValidationService validationService;
 		
 	@RequestMapping(value="/user",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
-	public void userRegistration(@RequestBody UsersDetails usersData){
+	public Sucess userRegistration(@RequestBody UsersDetails usersData){
 		usersService.doUserRegistration(usersData);
+		Sucess sucess = new Sucess();
+		sucess.setMessage("Sucess");
+		sucess.setStatus(200);
+		return sucess;
 	}
 	
 	@RequestMapping(value="/user", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
@@ -41,7 +45,8 @@ public class UserController {
 	public Sucess forGotPassword(@RequestParam(value="email") String email){
 		usersService.doForGotPassword(email);
 		Sucess sucess = new Sucess();
-		sucess.setStatus("Sucess");
+		sucess.setMessage("Sucess");
+		sucess.setStatus(200);
 		return sucess;
 	}
 	
@@ -49,7 +54,8 @@ public class UserController {
 	public Sucess changePassword(@RequestParam(value="email") String email,@RequestParam(value="current") String current,@RequestParam(value="new") String newPassword){
 		usersService.doChangePassword(email,current,newPassword);
 		Sucess sucess = new Sucess();
-		sucess.setStatus("Sucess");
+		sucess.setMessage("Sucess");
+		sucess.setStatus(200);
 		return sucess;
 	}
 

@@ -12,7 +12,7 @@ public class ValidationServiceImpl implements ValidationService{
 
 	@Autowired
 	private UsersManager usersManager;
-	public boolean validateEmployee(UsersDetails usersDetails) {
+	public boolean validateUser(UsersDetails usersDetails) {
 		return isEmailAlreadyExisted(usersDetails);
 	}
 	
@@ -20,6 +20,11 @@ public class ValidationServiceImpl implements ValidationService{
 		if(!usersManager.isEmailAlreadyExisted(usersDetails)) 
 			throw new EmailAlreadyExistedException("exception.Email_Already_Existed",usersDetails.getEmail());
 		return false;
+	}
+	
+	public boolean isUserRegisteredWithSocialID(UsersDetails users){
+		boolean flag = usersManager.isUserRegisteredWithSocialID(users);
+		return flag;
 	}
 
 }
