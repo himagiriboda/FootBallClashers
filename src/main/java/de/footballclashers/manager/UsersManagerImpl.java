@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import de.footballclashers.beans.UsersDetails;
 import de.footballclashers.dao.interfaces.fbc.UserMapperBasicDAO;
 import de.footballclashers.dao.model.fbc.Users;
+import de.footballclashers.exceptions.EmailAlreadyExistedException;
 
 @Component
 public class UsersManagerImpl implements UsersManager{
@@ -44,7 +45,8 @@ public class UsersManagerImpl implements UsersManager{
 	
 	public boolean isEmailAlreadyExisted(UsersDetails usersDetails){
 		Users users = userMapperBasicDAO.getUserByEmail(usersDetails);
-		if(users != null) return true;
+		if(users != null) 
+			return true;
 		return false;
 	}
 	

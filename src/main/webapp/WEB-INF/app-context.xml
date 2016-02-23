@@ -41,4 +41,8 @@
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="de.footballclashers.dao.interfaces.fbc" />
 	</bean>
+	<bean id="resourceBundle" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages"/>
+		<property name="defaultEncoding" value="UTF-8"/>
+	</bean>
 </beans>

@@ -18,4 +18,5 @@
 	<context:component-scan base-package="de" />
 	<mvc:annotation-driven />
 	<tx:annotation-driven />
+	
 </beans>
