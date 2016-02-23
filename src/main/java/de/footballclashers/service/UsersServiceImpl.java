@@ -26,11 +26,15 @@ public class UsersServiceImpl implements UsersService{
 	public void doForGotPassword(String email){
 		UsersDetails usersDetails = new UsersDetails();
 		usersDetails.setEmail(email);
-		validationService.isUserRegisteredWithSocialID(usersDetails);
-		usersManager.doForGotPassword(email);
+		boolean flag = validationService.isUserRegisteredWithSocialID(usersDetails);
+		if(flag) usersManager.doForGotPassword(email);
 	}
 	
 	public void doChangePassword(String email,String current,String newPassword){
+		UsersDetails users = new UsersDetails();
+		users.setPassword(current);
+		users.setEmail(email);
+		validationService.isCurrentPasswordExisted(users);
 		usersManager.doChangePassword(email,current,newPassword);
 	}
 	

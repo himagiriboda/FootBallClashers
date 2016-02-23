@@ -54,8 +54,11 @@ public class UsersManagerImpl implements UsersManager{
 	}
 	
 	public Users isUserRegisteredWithSocialID(UsersDetails usersDetails){
-		Users users = userMapperBasicDAO.getUserByEmail(usersDetails);
-		return users;
+		return userMapperBasicDAO.getUserByEmail(usersDetails);
+	}
+	
+	public Users isCurrentPasswordExisted(UsersDetails users){
+		return userMapperBasicDAO.getUserByEmail(users);
 	}
 	
 }

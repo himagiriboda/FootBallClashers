@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import de.footballclashers.beans.UsersDetails;
 import de.footballclashers.dao.model.fbc.Users;
+import de.footballclashers.exceptions.CurrentPasswordNotCorrect;
 import de.footballclashers.exceptions.EmailAlreadyExistedException;
 import de.footballclashers.exceptions.EmailNotExistedException;
 import de.footballclashers.exceptions.SocialIdNotPossibleToChangeException;
@@ -32,4 +33,13 @@ public class ValidationServiceImpl implements ValidationService{
 		return true;
 	}
 
+	public void isCurrentPasswordExisted(UsersDetails users){
+		Users user = usersManager.isCurrentPasswordExisted(users);
+		if(user == null) throw new EmailNotExistedException("exception.Email_Not_Existed", users.getEmail());
+		if(user.getSocial_id() != null) throw new SocialIdNotPossibleToChangeException("exception.socialID", "");
+		if(!user.getPassword().equalsIgnoreCase(users.getPassword())){
+			throw new CurrentPasswordNotCorrect("exception.current", users.getPassword());
+		}
+	}
+	
 }
