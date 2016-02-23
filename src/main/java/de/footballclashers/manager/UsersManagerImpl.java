@@ -53,16 +53,9 @@ public class UsersManagerImpl implements UsersManager{
 		return true;
 	}
 	
-	public boolean isUserRegisteredWithSocialID(UsersDetails usersDetails) throws EmailNotExistedException{
+	public Users isUserRegisteredWithSocialID(UsersDetails usersDetails){
 		Users users = userMapperBasicDAO.getUserByEmail(usersDetails);
-		if(users == null){
-			throw new EmailNotExistedException("exception.Email_Not_Existed", usersDetails.getEmail());
-		}
-		if(users.getSocial_id() != null) {
-			throw new EmailNotExistedException("exception.Email_Not_Existed", usersDetails.getEmail());
-		}
-		return true;
-		
+		return users;
 	}
 	
 }

@@ -11,5 +11,5 @@ public interface UsersManager {
 	public void doChangePassword(String email,String current,String newPassword);
 	public List<Users> getAllUser();
 	public boolean isEmailAlreadyExisted(UsersDetails usersDetails);
-	public boolean isUserRegisteredWithSocialID(UsersDetails usersDetails);
+	public Users isUserRegisteredWithSocialID(UsersDetails usersDetails);
 }

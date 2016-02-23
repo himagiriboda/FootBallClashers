@@ -36,6 +36,17 @@ public class GlobalExceptionController extends AbstractExceptionHandler{
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
 		error.setMessage(errorMessage);
 		return error;
+	}
+	
+	@ExceptionHandler(SocialIdNotPossibleToChangeException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+	public ErrorDetail socialIdNotPossibleToChangeException(SocialIdNotPossibleToChangeException exception) {
+		String errorMessage = resourceBundle.getMessage(exception.getKeyMessage(), null, Locale.getDefault());
+		ErrorDetail error = new ErrorDetail();
+		error.setStatus(HttpStatus.BAD_REQUEST.value());
+		error.setMessage(errorMessage);
+		return error;
 	}		
 	
 }
