@@ -66,7 +66,14 @@ public class UserController {
 	
 	@RequestMapping(value="/logIn",method=RequestMethod.POST)
 	public Sucess doLogIn(@RequestParam(value="email") String email,@RequestParam(value="password") String password){
-		return null;
+		UsersDetails usersDetails = new UsersDetails();
+		usersDetails.setEmail(email);
+		usersDetails.setPassword(password);
+		usersService.doLogIn(usersDetails);
+		Sucess sucess = new Sucess();
+		sucess.setMessage("Sucess");
+		sucess.setStatus(200);
+		return sucess;
 	}
 	
 }

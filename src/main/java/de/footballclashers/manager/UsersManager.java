@@ -13,4 +13,5 @@ public interface UsersManager {
 	public boolean isEmailAlreadyExisted(UsersDetails usersDetails);
 	public Users isUserRegisteredWithSocialID(UsersDetails usersDetails);
 	public Users isCurrentPasswordExisted(UsersDetails users);
+	public Users isUSerAuth(UsersDetails users);
 }

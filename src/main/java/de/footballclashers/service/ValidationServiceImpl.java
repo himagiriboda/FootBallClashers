@@ -8,6 +8,7 @@ import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.exceptions.CurrentPasswordNotCorrect;
 import de.footballclashers.exceptions.EmailAlreadyExistedException;
 import de.footballclashers.exceptions.EmailNotExistedException;
+import de.footballclashers.exceptions.LogInFailureException;
 import de.footballclashers.exceptions.SocialIdNotPossibleToChangeException;
 import de.footballclashers.manager.UsersManager;
 
@@ -39,6 +40,16 @@ public class ValidationServiceImpl implements ValidationService{
 		if(user.getSocial_id() != null) throw new SocialIdNotPossibleToChangeException("exception.socialID", "");
 		if(!user.getPassword().equalsIgnoreCase(users.getPassword())){
 			throw new CurrentPasswordNotCorrect("exception.current", users.getPassword());
+		}
+	}
+
+	public void isUSerAuth(UsersDetails usersDetails) {
+		Users user = usersManager.isUSerAuth(usersDetails);
+		if(user == null) throw new EmailNotExistedException("exception.Email_Not_Existed", usersDetails.getEmail());
+		if(usersDetails.getPassword()!=null && !user.getPassword().equalsIgnoreCase(usersDetails.getPassword())){
+			throw new LogInFailureException("exception.logIn", "");
+		}else if(usersDetails.getSocial_id()!=null && !usersDetails.getSocial_id().equalsIgnoreCase(usersDetails.getSocial_id())){
+			throw new LogInFailureException("exception.logIn", "");
 		}
 	}
 	

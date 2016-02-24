@@ -42,4 +42,8 @@ public class UsersServiceImpl implements UsersService{
 		return usersManager.getAllUser();
 	}
 
+	public void doLogIn(UsersDetails usersDetails) {
+		validationService.isUSerAuth(usersDetails);
+	}
+
 }

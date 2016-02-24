@@ -7,4 +7,5 @@ public interface ValidationService {
 	public boolean isEmailAlreadyExisted(UsersDetails usersDetails);
 	public boolean isUserRegisteredWithSocialID(UsersDetails users);
 	public void isCurrentPasswordExisted(UsersDetails users);
+	public void isUSerAuth(UsersDetails usersDetails);
 }
