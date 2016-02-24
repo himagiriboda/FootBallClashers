@@ -41,6 +41,12 @@ public class UserController {
 		return list;
 	}
 	
+	@RequestMapping(value="/user", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Users>  getUserDetails(@RequestParam(value="user") String user){
+		List<Users> list = usersService.getAllUser(user);
+		return list;
+	}
+	
 	@RequestMapping(value="/forGot")
 	public Sucess forGotPassword(@RequestParam(value="email") String email){
 		usersService.doForGotPassword(email);

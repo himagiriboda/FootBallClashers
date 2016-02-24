@@ -11,4 +11,5 @@ public interface UsersService {
 	public void doChangePassword(String email,String current,String newPassword);
 	public List<Users> getAllUser();
 	public void doLogIn(UsersDetails usersDetails);
+	public List<Users> getAllUser(String userName);
 }

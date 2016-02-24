@@ -8,6 +8,14 @@ public class LeagueDetails {
 	private Date startTime;
 	private Date endTime;
 	private Byte status;
+	private MatchesDetails matchesDetails;
+	
+	public MatchesDetails getMatchesDetails() {
+		return matchesDetails;
+	}
+	public void setMatchesDetails(MatchesDetails matchesDetails) {
+		this.matchesDetails = matchesDetails;
+	}
 	public String getName() {
 		return name;
 	}

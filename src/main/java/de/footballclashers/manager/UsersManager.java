@@ -14,4 +14,5 @@ public interface UsersManager {
 	public Users isUserRegisteredWithSocialID(UsersDetails usersDetails);
 	public Users isCurrentPasswordExisted(UsersDetails users);
 	public Users isUSerAuth(UsersDetails users);
+	public List<Users> getAllUser(UsersDetails usersDetails);
 }

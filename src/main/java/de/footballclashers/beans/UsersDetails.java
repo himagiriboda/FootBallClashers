@@ -2,6 +2,7 @@ package de.footballclashers.beans;
 
 public class UsersDetails {
 	
+	private Integer id;
 	private String name;
 	private String password;
 	private String social_id;
@@ -9,6 +10,13 @@ public class UsersDetails {
 	private String email;
 	private Integer points;
 	
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}

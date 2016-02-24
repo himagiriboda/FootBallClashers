@@ -31,5 +31,9 @@
 	    <select id="getUserByEmail" parameterType="de.footballclashers.dao.model.fbc.Users" resultMap="result">
 	        SELECT id,name,email,password,social_id,avatarImage,points FROM users where email = #{email,jdbcType=VARCHAR};
 	    </select>
+	    
+	    <select id="getAllUserByName" parameterType="de.footballclashers.dao.model.fbc.Users" resultMap="result">
+	        SELECT id,name,email,password,social_id,avatarImage,points FROM users where name = #{name,jdbcType=VARCHAR};
+	    </select>
 
 </mapper>
