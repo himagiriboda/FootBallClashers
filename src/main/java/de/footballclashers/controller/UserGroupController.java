@@ -17,11 +17,19 @@ import de.footballclashers.service.UserGroupServiceImpl;
 public class UserGroupController {
 
 	@Autowired
-	public UserGroupServiceImpl userGrp;
-
+	public UserGroupServiceImpl userGrpSrvcImpl;
+	
 	@RequestMapping(value = "/group", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void groupCreation(@RequestBody GroupDetails groupData) {
-		userGrp.doGroupCreation(groupData);
+	public Sucess groupCreation(@RequestBody GroupDetails groupData) {
+		int group_id = userGrpSrvcImpl.doGroupCreation(groupData);
+		userGrpSrvcImpl.addUserToGroup(group_id, groupData.getCreatedBy());
+		if(groupData.getUserIds().length > 0 ) {
+			userGrpSrvcImpl.addInvitations(group_id, groupData.getUserIds());
+		}
+		Sucess success = new Sucess();
+		success.setMessage("Success");
+		success.setStatus(200);
+		return success;
 	}
 
 	@RequestMapping(value = "/group", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -32,15 +40,26 @@ public class UserGroupController {
 	@RequestMapping(value = "/addUserToGroup", method = RequestMethod.POST)
 	public Sucess addUserToGroup(@RequestParam(value = "userId") String userId,
 			@RequestParam(value = "groupId") String groupId) {
-		System.out.println("user id is"+userId+" group id is"+groupId);
-		return null;
+		
+		// check here whether league has been started or not.If not then only add user
+		
+		userGrpSrvcImpl.addInvitation(Integer.parseInt(groupId), Integer.parseInt(userId));
+		Sucess success = new Sucess();
+		success.setMessage("Success");
+		success.setStatus(200);
+		return success;
 	}
 
 	@RequestMapping(value = "/AcceptingInvitation", method = RequestMethod.POST)
 	public Sucess AcceptingInvitation(
 			@RequestParam(value = "userId") String userId,
 			@RequestParam(value = "groupId") String groupId) {
-		return null;
+		userGrpSrvcImpl.acceptInvitation(Integer.parseInt(groupId), Integer.parseInt(userId));
+		Sucess success = new Sucess();
+		success.setMessage("Success");
+		success.setStatus(200);
+		
+		return success;
 	}
 
 	@RequestMapping(value = "/deleteUserFromGroup", method = RequestMethod.DELETE)

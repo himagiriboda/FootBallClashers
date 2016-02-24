@@ -30,7 +30,7 @@ public class UserController {
 	public Sucess userRegistration(@RequestBody UsersDetails usersData){
 		usersService.doUserRegistration(usersData);
 		Sucess sucess = new Sucess();
-		sucess.setMessage("Sucess");
+		sucess.setMessage("Success");
 		sucess.setStatus(200);
 		return sucess;
 	}
@@ -45,7 +45,7 @@ public class UserController {
 	public Sucess forGotPassword(@RequestParam(value="email") String email){
 		usersService.doForGotPassword(email);
 		Sucess sucess = new Sucess();
-		sucess.setMessage("Sucess");
+		sucess.setMessage("Success");
 		sucess.setStatus(200);
 		return sucess;
 	}
@@ -54,7 +54,7 @@ public class UserController {
 	public Sucess changePassword(@RequestParam(value="email") String email,@RequestParam(value="current") String current,@RequestParam(value="new") String newPassword){
 		usersService.doChangePassword(email,current,newPassword);
 		Sucess sucess = new Sucess();
-		sucess.setMessage("Sucess");
+		sucess.setMessage("Success");
 		sucess.setStatus(200);
 		return sucess;
 	}

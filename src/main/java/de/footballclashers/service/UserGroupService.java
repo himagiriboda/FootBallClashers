@@ -3,6 +3,10 @@ package de.footballclashers.service;
 import de.footballclashers.beans.GroupDetails;
 
 public interface UserGroupService {
-	public void doGroupCreation(GroupDetails group_details);
+	public int doGroupCreation(GroupDetails group_details);
+	public void addUserToGroup(int group_id,int user_id);
+	public void addInvitations(int group_id,String[] userIds);
+	public void addInvitation(int group_id,int userId);
+	public void acceptInvitation(int group_id, int user_id);
 
 }

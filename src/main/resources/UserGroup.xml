@@ -6,4 +6,17 @@
 		insert into user_group(league_id,name,createdBy) values 
 		(#{leagueId},#{groupName},#{createdBy})
 	</insert>
+	<select id="insert_groupMembers" parameterType="map">
+		insert into group_members(user_group_id,user_id) values (
+		#{group_id},#{user_id})	
+	</select>
+	
+	<select id="insertInvitations" parameterType="map">
+		insert into invitation(user_group_id,user_id) values (
+		#{group_id},#{user_id})	
+	</select>
+	
+	<select id="deleteInvitationEntry" parameterType="map">
+		delete from invitation where user_group_id=#{group_id}  and user_id=#{user_id}
+	</select>
 </mapper>

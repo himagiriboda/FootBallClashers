@@ -5,7 +5,12 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserGroup {
-	/* public void insert(@Param("leagueId") int leagueId, @Param("groupName") String groupName,
-			@Param("createdBy") int createdBy);*/
-	public void insert(Map<String,Object> dataMap);
+
+	public int insert(Map<String, Object> dataMap);
+
+	public void insert_groupMembers(Map<String, Object> dataMap);
+
+	public void insertInvitations(Map<String, Object> dataMap);
+
+	public void deleteInvitationEntry(Map<String, Object> dataMap);
 }

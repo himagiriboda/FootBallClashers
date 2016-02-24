@@ -1,5 +1,6 @@
 package de.footballclashers.beans;
 
+
 public class GroupDetails {
 
 	private int leagueId;
