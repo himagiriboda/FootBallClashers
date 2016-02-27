@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.footballclashers.beans.GroupDetails;
 import de.footballclashers.beans.Sucess;
 import de.footballclashers.beans.UsersDetails;
+import de.footballclashers.dao.interfaces.fbc.UserGroup;
 import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.service.UsersService;
 import de.footballclashers.service.ValidationService;
@@ -25,7 +27,10 @@ public class UserController {
 	
 	@Autowired
 	private ValidationService validationService;
-		
+	
+	@Autowired
+	private UserGroup userGroup;
+	
 	@RequestMapping(value="/user",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Sucess userRegistration(@RequestBody UsersDetails usersData){
 		usersService.doUserRegistration(usersData);
@@ -35,7 +40,7 @@ public class UserController {
 		return sucess;
 	}
 	
-	@RequestMapping(value="/user", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value="/users", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Users>  getUserDetails(){
 		List<Users> list = usersService.getAllUser();
 		return list;
@@ -46,6 +51,7 @@ public class UserController {
 		List<Users> list = usersService.getAllUser(user);
 		return list;
 	}
+	
 	
 	@RequestMapping(value="/forGot")
 	public Sucess forGotPassword(@RequestParam(value="email") String email){
@@ -66,8 +72,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/invitaions",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<UsersDetails> findInvitaions(@RequestParam(value="userID") String userID){
-		return null;
+	public List<Users> findInvitaions(@RequestParam(value="email") String email){
+		return usersService.getListOfInvitations(email);
 	}
 	
 	@RequestMapping(value="/logIn",method=RequestMethod.POST)

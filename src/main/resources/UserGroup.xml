@@ -19,4 +19,28 @@
 	<select id="deleteInvitationEntry" parameterType="map">
 		delete from invitation where user_group_id=#{group_id}  and user_id=#{user_id}
 	</select>
+	
+	  <resultMap id="result" type="de.footballclashers.beans.GroupDetails">
+	      <id property="id" column="id" />
+	      <result property="groupName" column="gName"/>
+	      <result property="leagueId" column="league_id"/>
+	      <result property="leagueName" column="lname"/>
+	      <result property="createdBy" column="createdBy"/>
+	      <result property="groupByOwnerName" column="owner"/>
+	  </resultMap>
+	 
+	    <select id="listOfGroupsCreatedByUser" parameterType="map" resultMap="result">
+	        select ug.id as id,ug.name as gName,ug.league_id as league_id,l.name as lname,ug.createdBy as createdBy,u.name as owner from user_group ug join users u on u.id=ug.createdBy
+join league l on l.id = ug.league_id where u.email=#{email}
+	    </select>
+	    
+	    <select id="listOfGroupsPartOfUser" parameterType="map" resultMap="result">
+	        select ug.id as id,ug.name as gName,ug.league_id as league_id,l.name as lname
+,ug.createdBy as createdBy,u.name as owner 
+from group_members gm 
+join user_group ug on gm.user_group_id=ug.id
+JOIN league l on l.id = ug.league_id
+join users u on u.id = gm.user_id where u.email=#{email}
+	    </select>
+	
 </mapper>

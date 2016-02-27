@@ -1,5 +1,9 @@
 package de.footballclashers.beans;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_EMPTY)
 public class UsersDetails {
 	
 	private Integer id;

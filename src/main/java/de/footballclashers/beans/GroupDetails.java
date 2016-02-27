@@ -1,11 +1,17 @@
 package de.footballclashers.beans;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonInclude(Include.NON_EMPTY)
 public class GroupDetails {
 
+	private int id;
 	private int leagueId;
+	private String leagueName;
 	private String groupName;
 	private int createdBy;
+	private String groupByOwnerName;
 	private String[] userIds;
 	
 	public GroupDetails() {
@@ -44,6 +50,31 @@ public class GroupDetails {
 		this.leagueId = leagueId;
 	}
 
+	public String getLeagueName() {
+		return leagueName;
+	}
+
+	public void setLeagueName(String leagueName) {
+		this.leagueName = leagueName;
+	}
+
+	public String getGroupByOwnerName() {
+		return groupByOwnerName;
+	}
+
+	public void setGroupByOwnerName(String groupByOwnerName) {
+		this.groupByOwnerName = groupByOwnerName;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 	
 
 }

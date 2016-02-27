@@ -2,6 +2,10 @@ package de.footballclashers.dao.model.fbc;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_EMPTY)
 public class Users implements Serializable {
 	/**
 	 * 

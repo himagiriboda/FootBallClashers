@@ -1,6 +1,8 @@
 package de.footballclashers.manager;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -66,6 +68,12 @@ public class UsersManagerImpl implements UsersManager{
 	
 	public Users isUSerAuth(UsersDetails users){
 		return userMapperBasicDAO.getUserByEmail(users);
+	}
+	
+	public List<Users> getListOfInvitations(String email) {
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		dataMap.put("email",email);
+		return userMapperBasicDAO.getAllInvitations(dataMap);
 	}
 	
 }

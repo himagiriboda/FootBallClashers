@@ -1,5 +1,7 @@
 package de.footballclashers.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.footballclashers.beans.GroupDetails;
 import de.footballclashers.beans.Sucess;
-import de.footballclashers.service.UserGroupServiceImpl;
+import de.footballclashers.service.UserGroupService;
 
 @RestController
 @RequestMapping("/GroupManagement")
 public class UserGroupController {
 
 	@Autowired
-	public UserGroupServiceImpl userGrpSrvcImpl;
+	public UserGroupService userGrpSrvcImpl;
 	
 	@RequestMapping(value = "/group", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Sucess groupCreation(@RequestBody GroupDetails groupData) {
@@ -33,8 +35,18 @@ public class UserGroupController {
 	}
 
 	@RequestMapping(value = "/group", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public GroupDetails getGroupDetails() {
+	public GroupDetails getGroupDetails(@RequestParam(value="email") String email) {
 		return null;
+	}
+	
+	@RequestMapping(value="/listOfGroupsCreatedByUser",method=RequestMethod.GET)
+	public List<GroupDetails> listOfGroupsCreatedByUser(@RequestParam(value="email") String email){
+		return userGrpSrvcImpl.listOfGroupsCreatedByUser(email);
+	}
+	
+	@RequestMapping(value="/listOfGroupsPartOfUser",method=RequestMethod.GET)
+	public List<GroupDetails> listOfGroupsPartOfUser(@RequestParam(value="email") String email){
+		return userGrpSrvcImpl.listOfGroupsPartOfUser(email);
 	}
 
 	@RequestMapping(value = "/addUserToGroup", method = RequestMethod.POST)

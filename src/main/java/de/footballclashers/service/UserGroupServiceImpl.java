@@ -1,6 +1,7 @@
 package de.footballclashers.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -10,13 +11,15 @@ import org.springframework.stereotype.Component;
 
 import de.footballclashers.beans.GroupDetails;
 import de.footballclashers.dao.interfaces.fbc.UserGroup;
+import de.footballclashers.manager.UserGroupManager;
 
 @Component
 public class UserGroupServiceImpl implements UserGroupService {
-	private static Logger logger = LoggerFactory
-			.getLogger(UserGroupServiceImpl.class);
+	private static Logger logger = LoggerFactory.getLogger(UserGroupServiceImpl.class);
 	@Autowired
 	private UserGroup usrGrp;
+	@Autowired
+	private UserGroupManager userGroupManager;
 
 	public int doGroupCreation(GroupDetails group_details) {
 
@@ -72,6 +75,14 @@ public class UserGroupServiceImpl implements UserGroupService {
 		dataMap.put("user_id", user_id);
 		usrGrp.deleteInvitationEntry(dataMap);
 		usrGrp.insert_groupMembers(dataMap);
+	}
+	
+	public List<GroupDetails> listOfGroupsCreatedByUser(String Email){
+		return userGroupManager.listOfGroupsCreatedByUser(Email);
+	}
+	
+	public List<GroupDetails> listOfGroupsPartOfUser(String Email){
+		return userGroupManager.listOfGroupsCreatedByUser(Email);
 	}
 
 }
