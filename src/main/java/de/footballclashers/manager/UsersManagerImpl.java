@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import de.footballclashers.beans.UsersDetails;
 import de.footballclashers.dao.interfaces.fbc.UserMapperBasicDAO;
 import de.footballclashers.dao.model.fbc.Users;
-import de.footballclashers.exceptions.EmailNotExistedException;
 
 @Component
 public class UsersManagerImpl implements UsersManager{
@@ -18,13 +17,8 @@ public class UsersManagerImpl implements UsersManager{
 	@Autowired
 	private UserMapperBasicDAO userMapperBasicDAO;
 	
-	public void doUserRegistration(UsersDetails usersDetails) {
-		Users users = new Users();
-		users.setEmail(usersDetails.getEmail());
-		users.setName(usersDetails.getName());
-		users.setPassword(usersDetails.getPassword());
-		users.setSocial_id(usersDetails.getSocial_id());
-		userMapperBasicDAO.insert(users);
+	public void doUserRegistration(Users usersDetails) {
+		userMapperBasicDAO.insert(usersDetails);
 	}
 	
 	public void doForGotPassword(String email){
@@ -49,24 +43,23 @@ public class UsersManagerImpl implements UsersManager{
 		return userMapperBasicDAO.getAllUserByName(usersDetails.getName());
 	}
 	
-	public boolean isEmailAlreadyExisted(UsersDetails usersDetails){
-		Users u = new Users();
-		u.setEmail(usersDetails.getEmail());
+	public boolean isEmailAlreadyExisted(Users usersDetails){
 		Users users = userMapperBasicDAO.getUserByEmail(usersDetails);
 		if(users != null) 
 			return false;
 		return true;
 	}
 	
-	public Users isUserRegisteredWithSocialID(UsersDetails usersDetails){
+	public Users isUserRegisteredWithSocialID(Users usersDetails){
 		return userMapperBasicDAO.getUserByEmail(usersDetails);
 	}
 	
-	public Users isCurrentPasswordExisted(UsersDetails users){
+	public Users isCurrentPasswordExisted(Users users){
 		return userMapperBasicDAO.getUserByEmail(users);
 	}
 	
-	public Users isUSerAuth(UsersDetails users){
+	public Users isUSerAuth(Users users){
+		System.out.println("users"+users.getEmail());
 		return userMapperBasicDAO.getUserByEmail(users);
 	}
 	
@@ -74,6 +67,11 @@ public class UsersManagerImpl implements UsersManager{
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("email",email);
 		return userMapperBasicDAO.getAllInvitations(dataMap);
+	}
+
+	public List<Users> getAllUser(Users users) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -17,21 +17,21 @@ public class UsersServiceImpl implements UsersService{
 	@Autowired
 	private ValidationService validationService;
 	
-	public void doUserRegistration(UsersDetails usersDetails) {
-		boolean flag = validationService.validateUser(usersDetails);
+	public void doUserRegistration(Users users) {
+		boolean flag = validationService.validateUser(users);
 		if(flag)
-			usersManager.doUserRegistration(usersDetails);
+			usersManager.doUserRegistration(users);
 	}
 	
 	public void doForGotPassword(String email){
-		UsersDetails usersDetails = new UsersDetails();
+		Users usersDetails = new Users();
 		usersDetails.setEmail(email);
 		boolean flag = validationService.isUserRegisteredWithSocialID(usersDetails);
 		if(flag) usersManager.doForGotPassword(email);
 	}
 	
 	public void doChangePassword(String email,String current,String newPassword){
-		UsersDetails users = new UsersDetails();
+		Users users = new Users();
 		users.setPassword(current);
 		users.setEmail(email);
 		validationService.isCurrentPasswordExisted(users);
@@ -43,12 +43,12 @@ public class UsersServiceImpl implements UsersService{
 	}
 	
 	public List<Users> getAllUser(String userName){
-		UsersDetails usersDetails = new UsersDetails();
+		Users usersDetails = new Users();
 		usersDetails.setName(userName);
 		return usersManager.getAllUser(usersDetails);
 	}
 
-	public void doLogIn(UsersDetails usersDetails) {
+	public void doLogIn(Users usersDetails) {
 		validationService.isUSerAuth(usersDetails);
 	}
 

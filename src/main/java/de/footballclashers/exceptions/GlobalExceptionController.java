@@ -58,5 +58,17 @@ public class GlobalExceptionController extends AbstractExceptionHandler{
 		error.setStatus(HttpStatus.BAD_REQUEST.value());
 		error.setMessage(errorMessage);
 		return error;
-	}		
+	}	
+	
+	@ExceptionHandler(CurrentPasswordNotCorrect.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+	public ErrorDetail currentPasswordNotCorrect(CurrentPasswordNotCorrect exception) {
+		String errorMessage = resourceBundle.getMessage(exception.getKeyMessage(), null, Locale.getDefault());
+		errorMessage = new MessageFormat(errorMessage).format(new Object[]{exception.getExtraMesaage()});
+		ErrorDetail error = new ErrorDetail();
+		error.setStatus(HttpStatus.BAD_REQUEST.value());
+		error.setMessage(errorMessage);
+		return error;
+	}
 }

@@ -1,5 +1,7 @@
 package de.footballclashers.beans;
 
+import java.util.Arrays;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -58,7 +60,12 @@ public class UsersDetails {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "UsersDetails [id=" + id + ", name=" + name + ", password="
+				+ password + ", social_id=" + social_id + ", avatarImage="
+				+ Arrays.toString(avatarImage) + ", email=" + email
+				+ ", points=" + points + "]";
+	}
 	
 }

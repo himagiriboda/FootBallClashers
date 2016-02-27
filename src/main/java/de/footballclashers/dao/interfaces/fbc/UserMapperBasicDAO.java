@@ -3,7 +3,6 @@ package de.footballclashers.dao.interfaces.fbc;
 import java.util.List;
 import java.util.Map;
 
-import de.footballclashers.beans.UsersDetails;
 import de.footballclashers.dao.model.fbc.Users;
 public interface UserMapperBasicDAO {
 	
@@ -15,7 +14,7 @@ public interface UserMapperBasicDAO {
 	
 	public List<Users> getAllUserByName(String name);
 	
-	public Users getUserByEmail(UsersDetails usersDetails);
+	public Users getUserByEmail(Users usersDetails);
 	
 	public List<Users> getAllInvitations(Map map);
 	

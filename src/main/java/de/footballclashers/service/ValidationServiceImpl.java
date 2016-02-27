@@ -3,7 +3,6 @@ package de.footballclashers.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import de.footballclashers.beans.UsersDetails;
 import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.exceptions.CurrentPasswordNotCorrect;
 import de.footballclashers.exceptions.EmailAlreadyExistedException;
@@ -17,24 +16,24 @@ public class ValidationServiceImpl implements ValidationService{
 
 	@Autowired
 	private UsersManager usersManager;
-	public boolean validateUser(UsersDetails usersDetails) {
-		return isEmailAlreadyExisted(usersDetails);
+	public boolean validateUser(Users users) {
+		return isEmailAlreadyExisted(users);
 	}
 	
-	public boolean isEmailAlreadyExisted(UsersDetails usersDetails) throws EmailAlreadyExistedException{
+	public boolean isEmailAlreadyExisted(Users usersDetails) throws EmailAlreadyExistedException{
 		if(!usersManager.isEmailAlreadyExisted(usersDetails)) 
 			throw new EmailAlreadyExistedException("exception.Email_Already_Existed",usersDetails.getEmail());
-		return false;
+		return true;
 	}
 	
-	public boolean isUserRegisteredWithSocialID(UsersDetails users) throws EmailNotExistedException,SocialIdNotPossibleToChangeException{
+	public boolean isUserRegisteredWithSocialID(Users users) throws EmailNotExistedException,SocialIdNotPossibleToChangeException{
 		Users user = usersManager.isUserRegisteredWithSocialID(users);
 		if(user == null) throw new EmailNotExistedException("exception.Email_Not_Existed", users.getEmail());
 		if(user.getSocial_id() != null) throw new SocialIdNotPossibleToChangeException("exception.socialID", "");
 		return true;
 	}
 
-	public void isCurrentPasswordExisted(UsersDetails users){
+	public void isCurrentPasswordExisted(Users users){
 		Users user = usersManager.isCurrentPasswordExisted(users);
 		if(user == null) throw new EmailNotExistedException("exception.Email_Not_Existed", users.getEmail());
 		if(user.getSocial_id() != null) throw new SocialIdNotPossibleToChangeException("exception.socialID", "");
@@ -43,7 +42,7 @@ public class ValidationServiceImpl implements ValidationService{
 		}
 	}
 
-	public void isUSerAuth(UsersDetails usersDetails) {
+	public void isUSerAuth(Users usersDetails) {
 		Users user = usersManager.isUSerAuth(usersDetails);
 		if(user == null) throw new EmailNotExistedException("exception.Email_Not_Existed", usersDetails.getEmail());
 		if(usersDetails.getPassword()!=null && !user.getPassword().equalsIgnoreCase(usersDetails.getPassword())){
