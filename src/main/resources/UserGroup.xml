@@ -2,45 +2,76 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="de.footballclashers.dao.interfaces.fbc.UserGroup">
 
-	<insert id="insert" parameterType="map" useGeneratedKeys="true" keyProperty="id"  keyColumn="id">
-		insert into user_group(league_id,name,createdBy) values 
+	<insert id="insert" parameterType="map" useGeneratedKeys="true"
+		keyProperty="id" keyColumn="id">
+		insert into
+		user_group(league_id,name,createdBy) values
 		(#{leagueId},#{groupName},#{createdBy})
 	</insert>
 	<select id="insert_groupMembers" parameterType="map">
-		insert into group_members(user_group_id,user_id) values (
-		#{group_id},#{user_id})	
+		insert into
+		group_members(user_group_id,user_id) values (
+		#{group_id},#{user_id})
 	</select>
-	
+
 	<select id="insertInvitations" parameterType="map">
-		insert into invitation(user_group_id,user_id) values (
-		#{group_id},#{user_id})	
+		insert into
+		invitation(user_group_id,user_id) values (
+		#{group_id},#{user_id})
 	</select>
-	
+
 	<select id="deleteInvitationEntry" parameterType="map">
-		delete from invitation where user_group_id=#{group_id}  and user_id=#{user_id}
+		delete from
+		invitation where user_group_id=#{group_id} and user_id=#{user_id}
 	</select>
-	
-	  <resultMap id="result" type="de.footballclashers.beans.GroupDetails">
-	      <id property="id" column="id" />
-	      <result property="groupName" column="gName"/>
-	      <result property="leagueId" column="league_id"/>
-	      <result property="leagueName" column="lname"/>
-	      <result property="createdBy" column="createdBy"/>
-	      <result property="groupByOwnerName" column="owner"/>
-	  </resultMap>
-	 
-	    <select id="listOfGroupsCreatedByUser" parameterType="map" resultMap="result">
-	        select ug.id as id,ug.name as gName,ug.league_id as league_id,l.name as lname,ug.createdBy as createdBy,u.name as owner from user_group ug join users u on u.id=ug.createdBy
-join league l on l.id = ug.league_id where u.email=#{email}
-	    </select>
-	    
-	    <select id="listOfGroupsPartOfUser" parameterType="map" resultMap="result">
-	        select ug.id as id,ug.name as gName,ug.league_id as league_id,l.name as lname
-,ug.createdBy as createdBy,u.name as owner 
-from group_members gm 
-join user_group ug on gm.user_group_id=ug.id
-JOIN league l on l.id = ug.league_id
-join users u on u.id = gm.user_id where u.email=#{email}
-	    </select>
-	
+
+	<resultMap id="result" type="de.footballclashers.beans.GroupDetails">
+		<id property="id" column="id" />
+		<result property="groupName" column="gName" />
+		<result property="leagueId" column="league_id" />
+		<result property="leagueName" column="lname" />
+		<result property="createdBy" column="createdBy" />
+		<result property="groupByOwnerName" column="owner" />
+	</resultMap>
+
+	<select id="listOfGroupsCreatedByUser" parameterType="map"
+		resultMap="result">
+		select ug.id as id,ug.name as gName,ug.league_id as
+		league_id,l.name as
+		lname,ug.createdBy as createdBy,u.name as owner
+		from user_group ug
+		join users u on u.id=ug.createdBy
+		join league l on
+		l.id = ug.league_id where u.email=#{email}
+	</select>
+
+	<select id="listOfGroupsPartOfUser" parameterType="map"
+		resultMap="result">
+		select ug.id as id,ug.name as gName,ug.league_id as
+		league_id,l.name as
+		lname
+		,ug.createdBy as createdBy,u.name as owner
+		from group_members gm
+		join user_group ug on gm.user_group_id=ug.id
+		JOIN
+		league l on l.id = ug.league_id
+		join users u on u.id = gm.user_id where
+		u.email=#{email}
+	</select>
+	<select id='insertChat' parameterType="de.footballclashers.beans.GroupChat">
+		insert into
+		group_chat(user_group_id,user_id,message) values
+		(#{group_id},#{user_id},#{message})
+	</select>
+
+	<select id="groupChatList" parameterType="int"
+		resultType="de.footballclashers.beans.GroupChat">
+		select name as username ,message,x.last_updated as last_updated from
+		group_chat as x left join users as y on
+		x.user_id=y.id where x.user_group_id=#{group_id} order by last_updated asc
+	</select>
+
+	<delete id="deleteGroupUser" parameterType="int">
+		delete from group_members where user_group_id=#{group_id} and user_id=#{user_id}
+	</delete>
 </mapper>

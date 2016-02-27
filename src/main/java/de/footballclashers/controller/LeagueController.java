@@ -1,6 +1,5 @@
 package de.footballclashers.controller;
 
-import java.awt.Label;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
