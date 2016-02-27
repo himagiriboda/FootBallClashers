@@ -45,8 +45,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Users>  getUserDetails(@RequestParam(value="user") String user){
-		List<Users> list = usersService.getAllUser(user);
+	public List<Users>  getUserDetails(@RequestParam(value="userName") String userName){
+		System.out.println(userName);
+		List<Users> list = usersService.getAllUser(userName);
 		return list;
 	}
 	
@@ -74,7 +75,7 @@ public class UserController {
 		return usersService.getListOfInvitations(email);
 	}
 	
-	@RequestMapping(value="/logIn",method=RequestMethod.GET)
+	@RequestMapping(value="/logIn",method=RequestMethod.POST)
 	public Sucess doLogIn(@RequestParam(value="email") String email,@RequestParam(value="password") String password){
 		Users usersDetails = new Users();
 		usersDetails.setEmail(email);

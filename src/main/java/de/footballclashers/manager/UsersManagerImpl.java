@@ -39,7 +39,7 @@ public class UsersManagerImpl implements UsersManager{
 		return userMapperBasicDAO.getAllUser();
 	}
 	
-	public List<Users> getAllUser(UsersDetails usersDetails){
+	public List<Users> getAllUser(Users usersDetails){
 		return userMapperBasicDAO.getAllUserByName(usersDetails.getName());
 	}
 	
@@ -69,9 +69,4 @@ public class UsersManagerImpl implements UsersManager{
 		return userMapperBasicDAO.getAllInvitations(dataMap);
 	}
 
-	public List<Users> getAllUser(Users users) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }
