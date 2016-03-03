@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.footballclashers.beans.Sucess;
+import de.footballclashers.beans.GroupDetails;
+import de.footballclashers.beans.Success;
+import de.footballclashers.beans.UsersDetails;
 import de.footballclashers.dao.interfaces.fbc.UserGroup;
 import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.service.UsersService;
@@ -53,21 +56,21 @@ public class UserController {
 	
 	
 	@RequestMapping(value="/forGot")
-	public Sucess forGotPassword(@RequestParam(value="email") String email){
+	public Success forGotPassword(@RequestParam(value="email") String email){
 		usersService.doForGotPassword(email);
-		Sucess sucess = new Sucess();
-		sucess.setMessage("Success");
-		sucess.setStatus(200);
-		return sucess;
+		Success success = new Success();
+		success.setMessage("Success");
+		success.setStatus(200);
+		return success;
 	}
 	
 	@RequestMapping(value="/change")
-	public Sucess changePassword(@RequestParam(value="email") String email,@RequestParam(value="current") String current,@RequestParam(value="new") String newPassword){
+	public Success changePassword(@RequestParam(value="email") String email,@RequestParam(value="current") String current,@RequestParam(value="new") String newPassword){
 		usersService.doChangePassword(email,current,newPassword);
-		Sucess sucess = new Sucess();
-		sucess.setMessage("Success");
-		sucess.setStatus(200);
-		return sucess;
+		Success success = new Success();
+		success.setMessage("Success");
+		success.setStatus(200);
+		return success;
 	}
 
 	@RequestMapping(value="/invitaions",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
@@ -81,10 +84,10 @@ public class UserController {
 		usersDetails.setEmail(email);
 		usersDetails.setPassword(password);
 		usersService.doLogIn(usersDetails);
-		Sucess sucess = new Sucess();
-		sucess.setMessage("Sucess");
-		sucess.setStatus(200);
-		return sucess;
+		Success success = new Success();
+		success.setMessage("Sucess");
+		success.setStatus(200);
+		return success;
 	}
 	
 }

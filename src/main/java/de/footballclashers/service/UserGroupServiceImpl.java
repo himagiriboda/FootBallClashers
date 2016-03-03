@@ -9,13 +9,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import de.footballclashers.beans.GroupChat;
+import de.footballclashers.beans.GroupChatList;
 import de.footballclashers.beans.GroupDetails;
+import de.footballclashers.beans.Status;
 import de.footballclashers.dao.interfaces.fbc.UserGroup;
 import de.footballclashers.manager.UserGroupManager;
 
 @Component
 public class UserGroupServiceImpl implements UserGroupService {
-	private static Logger logger = LoggerFactory.getLogger(UserGroupServiceImpl.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(UserGroupServiceImpl.class);
 	@Autowired
 	private UserGroup usrGrp;
 	@Autowired
@@ -42,7 +46,6 @@ public class UserGroupServiceImpl implements UserGroupService {
 		dataMap.put("user_id", user_id);
 		usrGrp.insert_groupMembers(dataMap);
 		dataMap = null;
-
 	}
 
 	public void addInvitations(int group_id, String[] userIds) {
@@ -76,13 +79,43 @@ public class UserGroupServiceImpl implements UserGroupService {
 		usrGrp.deleteInvitationEntry(dataMap);
 		usrGrp.insert_groupMembers(dataMap);
 	}
-	
-	public List<GroupDetails> listOfGroupsCreatedByUser(String Email){
-		return userGroupManager.listOfGroupsCreatedByUser(Email);
-	}
-	
-	public List<GroupDetails> listOfGroupsPartOfUser(String Email){
+
+	public List<GroupDetails> listOfGroupsCreatedByUser(String Email) {
 		return userGroupManager.listOfGroupsCreatedByUser(Email);
 	}
 
+	public List<GroupDetails> listOfGroupsPartOfUser(String Email) {
+		return userGroupManager.listOfGroupsCreatedByUser(Email);
+	}
+
+	public void addGroupChat(GroupChat group_chat) {
+		usrGrp.insertChat(group_chat);
+	}
+
+	public GroupChatList getGroupChatList(int group_id) {
+		GroupChatList group_chatList = null;
+
+		List<GroupChat> chatList = null;
+		chatList = usrGrp.groupChatList(group_id);
+
+		group_chatList = new GroupChatList();
+		if (chatList != null) {
+			group_chatList.setChatDetails(chatList);
+
+			Status status = new Status();
+			status.setCode("200");
+			status.setMessage("Success");
+			group_chatList.setStatus(status);
+		} else {
+			Status status = new Status();
+			status.setCode("500");
+			status.setMessage("Internal Server Error");
+			group_chatList.setStatus(status);
+		}
+		return group_chatList;
+	}
+
+	public void deleteGroupUser(int group_id, int user_id) {
+		usrGrp.deleteGroupUser(group_id, user_id);
+	}
 }
