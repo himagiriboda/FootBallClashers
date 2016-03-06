@@ -7,6 +7,9 @@ import org.apache.ibatis.annotations.Param;
 
 import de.footballclashers.beans.GroupChat;
 import de.footballclashers.beans.GroupDetails;
+import de.footballclashers.beans.MatchesDetails;
+import de.footballclashers.beans.TeamDetails;
+import de.footballclashers.dao.model.fbc.Users;
 
 public interface UserGroup {
 
@@ -27,4 +30,12 @@ public interface UserGroup {
 	public List<GroupChat> groupChatList(int group_id);
 	
 	public void deleteGroupUser(@Param("group_id") int group_id, @Param("user_id") int user_id);
+	
+	public List<Users> getUsersByGroupID(@Param("group_id") int group_id);
+	
+	public void dogroupMatchCreation(@Param("user_group_id") int group_id, @Param("match_id") int user_id);
+	
+	public List<MatchesDetails> findByListOfMatchesDetails(@Param("group_id") int group_id);
+	
+	public List<TeamDetails> findMatchDetilsByIDs(@Param("teamA") int teamA,@Param("teamB") int teamB);
 }

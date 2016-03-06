@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import de.footballclashers.beans.Sucess;
 import de.footballclashers.beans.GroupDetails;
 import de.footballclashers.beans.Success;
 import de.footballclashers.beans.UsersDetails;
@@ -33,9 +31,9 @@ public class UserController {
 	private UserGroup userGroup;
 	
 	@RequestMapping(value="/user",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Sucess userRegistration(@RequestBody Users users){
+	public Success userRegistration(@RequestBody Users users){
 		usersService.doUserRegistration(users);
-		Sucess sucess = new Sucess();
+		Success sucess = new Success();
 		sucess.setMessage("Success");
 		sucess.setStatus(200);
 		return sucess;
@@ -79,7 +77,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/logIn",method=RequestMethod.POST)
-	public Sucess doLogIn(@RequestParam(value="email") String email,@RequestParam(value="password") String password){
+	public Success doLogIn(@RequestParam(value="email") String email,@RequestParam(value="password") String password){
 		Users usersDetails = new Users();
 		usersDetails.setEmail(email);
 		usersDetails.setPassword(password);

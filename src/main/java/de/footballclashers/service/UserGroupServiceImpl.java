@@ -8,12 +8,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import de.footballclashers.beans.GroupChat;
 import de.footballclashers.beans.GroupChatList;
 import de.footballclashers.beans.GroupDetails;
+import de.footballclashers.beans.MatchesDetails;
 import de.footballclashers.beans.Status;
 import de.footballclashers.dao.interfaces.fbc.UserGroup;
+import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.manager.UserGroupManager;
 
 @Component
@@ -117,5 +120,17 @@ public class UserGroupServiceImpl implements UserGroupService {
 
 	public void deleteGroupUser(int group_id, int user_id) {
 		usrGrp.deleteGroupUser(group_id, user_id);
+	}
+	
+	public List<Users> findUsersByGroupID(int group_id){
+		return userGroupManager.findUsersByGroupID(group_id);
+	}
+
+	public void dogroupMatchCreation(int group_id, int match_id) {
+		userGroupManager.dogroupMatchCreation(group_id, match_id);
+	}
+	
+	public List<MatchesDetails> findByListOfMatchesDetails(int group_id){
+		return userGroupManager.findByListOfMatchesDetails(group_id);
 	}
 }

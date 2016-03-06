@@ -15,4 +15,5 @@ public interface UsersManager {
 	public Users isUSerAuth(Users users);
 	public List<Users> getAllUser(Users users);
 	public List<Users> getListOfInvitations(String email);
+	
 }

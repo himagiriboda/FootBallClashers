@@ -74,4 +74,52 @@
 	<delete id="deleteGroupUser" parameterType="int">
 		delete from group_members where user_group_id=#{group_id} and user_id=#{user_id}
 	</delete>
+	
+	 <resultMap id="result1" type="de.footballclashers.dao.model.fbc.Users">
+	        <result property="id" column="id"/>
+	        <result property="name" column="name"/>
+	        <result property="email" column="email"/>
+	        <result property="password" column="password"/>
+	        <result property="social_id" column="social_id"/>
+	        <result property="avatarImage" column="avatarImage"/>
+	        <result property="points" column="points"/>
+	        </resultMap>
+	        
+	        <select id="getUsersByGroupID" parameterType="int" resultMap="result1">
+	        select u.id as id,u.name as name,gm.points as points,u.avatarImage
+from group_members gm join users u on u.id = gm.user_id where gm.user_group_id=#{group_id}
+	    </select>
+	    
+	    <select id='dogroupMatchCreation' parameterType="int">
+		insert into group_user_match(user_group_id,match_id) values
+		(#{user_group_id},#{match_id})
+	</select>
+	
+	 <select id="findByListOfMatchesDetails" parameterType="int" resultMap="result2">
+	        select l.name as leagueName,m.Team_A as teamA  ,m.Team_A_score as teamAScore,
+m.Team_B as teamB,m.Team_B_score as teamBScore,m.match_time as matchTime
+from group_user_match gm 
+join matches m on m.id = gm.match_id
+join league l on l.id = m.league_id
+where gm.user_group_id=#{group_id}
+	    </select>
+	
+	     <resultMap id="result2" type="de.footballclashers.beans.MatchesDetails">
+	        <result property="leagueName" column="leagueName"/>
+	        <result property="teamA" column="teamA"/>
+	        <result property="teamAScore" column="teamAScore"/>
+	        <result property="teamB" column="teamB"/>
+	        <result property="teamBScore" column="teamBScore"/>
+	        <result property="matchTime" column="matchTime"/>
+	        </resultMap>
+	        
+	        <select id="findMatchDetilsByIDs" parameterType="int" resultMap="result3">
+	        select id,name from Team t where id in(#{teamA},#{teamB});
+	    </select>
+	
+	     <resultMap id="result3" type="de.footballclashers.beans.TeamDetails">
+	        <result property="id" column="id"/>
+	        <result property="name" column="name"/>
+	        </resultMap>
+	        
 </mapper>

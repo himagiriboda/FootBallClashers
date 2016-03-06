@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import de.footballclashers.beans.GroupChat;
 import de.footballclashers.beans.GroupChatList;
 import de.footballclashers.beans.GroupDetails;
+import de.footballclashers.beans.MatchesDetails;
 import de.footballclashers.beans.Success;
+import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.service.UserGroupService;
 
 @RestController
@@ -107,8 +109,27 @@ public class UserGroupController {
 	}
 
 	@RequestMapping(value = "/ChatList", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public GroupChatList getGroupChatList(
-			@RequestParam(value = "group_id") int group_id) {
+	public GroupChatList getGroupChatList(@RequestParam(value = "group_id") int group_id) {
 		return userGrpSrvcImpl.getGroupChatList(group_id);
+	}
+	
+	@RequestMapping(value = "/usersWithRanking", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Users> findUsersByGroupID(@RequestParam(value="group_id") int group_id){
+		return userGrpSrvcImpl.findUsersByGroupID(group_id);
+	}
+	
+	@RequestMapping(value="/groupMatch",method=RequestMethod.GET)
+	public Success groupMatchCreation(@RequestParam(value="group_id") int group_id,@RequestParam(value="match_id") int match_id){
+		userGrpSrvcImpl.dogroupMatchCreation(group_id, match_id);
+		Success success = new Success();
+		success.setMessage("Success");
+		success.setStatus(200);
+		return success;
+	}
+	
+	@RequestMapping(value="/matchesDetails",produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<MatchesDetails> findByListOfMatchesDetails(@RequestParam(value="group_id") int group_id){
+		return userGrpSrvcImpl.findByListOfMatchesDetails(group_id);
+		
 	}
 }

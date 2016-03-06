@@ -5,6 +5,8 @@ import java.util.List;
 import de.footballclashers.beans.GroupChat;
 import de.footballclashers.beans.GroupChatList;
 import de.footballclashers.beans.GroupDetails;
+import de.footballclashers.beans.MatchesDetails;
+import de.footballclashers.dao.model.fbc.Users;
 
 public interface UserGroupService {
 	public int doGroupCreation(GroupDetails group_details);
@@ -17,4 +19,8 @@ public interface UserGroupService {
 	public void addGroupChat(GroupChat group_chat);
 	public GroupChatList getGroupChatList(int group_id);
 	public void deleteGroupUser(int group_id,int user_id);
+	public List<Users> findUsersByGroupID(int group_id);
+	public void dogroupMatchCreation(int group_id,int match_id);
+	public List<MatchesDetails> findByListOfMatchesDetails(int group_id);
+	
 }

@@ -68,5 +68,5 @@ public class UsersManagerImpl implements UsersManager{
 		dataMap.put("email",email);
 		return userMapperBasicDAO.getAllInvitations(dataMap);
 	}
-
+	
 }

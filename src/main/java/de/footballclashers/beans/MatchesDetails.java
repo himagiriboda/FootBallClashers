@@ -2,11 +2,18 @@ package de.footballclashers.beans;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(Include.NON_EMPTY)
 public class MatchesDetails {
 	
 	private Integer leagueId;
+	private String leagueName;
 	private Integer teamA;
+	private String teamAName;
 	private Integer teamB;
+	private String teamBName;
 	private Integer teamAScore;
 	private Integer teamBScore;
 	private Date matchTime;
@@ -46,6 +53,24 @@ public class MatchesDetails {
 	}
 	public void setMatchTime(Date matchTime) {
 		this.matchTime = matchTime;
+	}
+	public String getLeagueName() {
+		return leagueName;
+	}
+	public void setLeagueName(String leagueName) {
+		this.leagueName = leagueName;
+	}
+	public String getTeamAName() {
+		return teamAName;
+	}
+	public void setTeamAName(String teamAName) {
+		this.teamAName = teamAName;
+	}
+	public String getTeamBName() {
+		return teamBName;
+	}
+	public void setTeamBName(String teamBName) {
+		this.teamBName = teamBName;
 	}
 	
 	

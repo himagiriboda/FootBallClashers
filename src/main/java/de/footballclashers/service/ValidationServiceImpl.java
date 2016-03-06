@@ -1,8 +1,11 @@
 package de.footballclashers.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import de.footballclashers.beans.MatchesDetails;
 import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.exceptions.CurrentPasswordNotCorrect;
 import de.footballclashers.exceptions.EmailAlreadyExistedException;
@@ -50,6 +53,11 @@ public class ValidationServiceImpl implements ValidationService{
 		}else if(usersDetails.getSocial_id()!=null && !usersDetails.getSocial_id().equalsIgnoreCase(usersDetails.getSocial_id())){
 			throw new LogInFailureException("exception.logIn", "");
 		}
+	}
+	
+	public List<MatchesDetails> findByListOfMatchesDetails(int group_id){
+		return null;
+		
 	}
 	
 }
