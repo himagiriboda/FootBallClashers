@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="de.footballclashers.dao.interfaces.fbc.Challenge">
+
+<insert id="setChallenge" parameterType="map" useGeneratedKeys="true"
+		keyProperty="id" keyColumn="id">
+	insert into challenge (match_id,from_user_id,to_user_id) values 
+	(#{match_id},#{from_user_id},#{to_user_id})
+</insert>
+</mapper>

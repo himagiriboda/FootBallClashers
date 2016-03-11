@@ -15,6 +15,7 @@ import de.footballclashers.beans.GroupChatList;
 import de.footballclashers.beans.GroupDetails;
 import de.footballclashers.beans.MatchesDetails;
 import de.footballclashers.beans.Status;
+import de.footballclashers.dao.interfaces.fbc.Prediction;
 import de.footballclashers.dao.interfaces.fbc.UserGroup;
 import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.manager.UserGroupManager;
@@ -25,9 +26,13 @@ public class UserGroupServiceImpl implements UserGroupService {
 			.getLogger(UserGroupServiceImpl.class);
 	@Autowired
 	private UserGroup usrGrp;
+	
 	@Autowired
 	private UserGroupManager userGroupManager;
 
+	@Autowired
+	private Prediction prediction;
+	
 	public int doGroupCreation(GroupDetails group_details) {
 
 		System.out.println("league id is" + group_details.getLeagueId());
@@ -132,5 +137,12 @@ public class UserGroupServiceImpl implements UserGroupService {
 	
 	public List<MatchesDetails> findByListOfMatchesDetails(int group_id){
 		return userGroupManager.findByListOfMatchesDetails(group_id);
+	}
+
+	public void setPrediction(int group_id, int user_id, int match_id,
+			int TeamA_score, int TeamB_score) {
+		int group_member_id=usrGrp.getGroupUserId(group_id, user_id);
+		prediction.insertGroupPrediction(group_member_id,user_id, match_id, TeamA_score, TeamB_score);
+		System.out.println("group user id is"+group_member_id);
 	}
 }

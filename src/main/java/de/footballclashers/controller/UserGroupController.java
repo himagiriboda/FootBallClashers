@@ -132,4 +132,15 @@ public class UserGroupController {
 		return userGrpSrvcImpl.findByListOfMatchesDetails(group_id);
 		
 	}
+	
+	@RequestMapping(value="/groupPrediction", produces= MediaType.APPLICATION_JSON_VALUE)
+	public Success ScorePrediction(@RequestParam("group_id") int group_id, @RequestParam("user_id") int user_id,
+			@RequestParam("match_id") int match_id, @RequestParam("TeamA_score") int A_score,
+			@RequestParam("TeamB_score") int B_score) {
+		userGrpSrvcImpl.setPrediction(group_id, user_id, match_id, A_score, B_score);
+		Success success = new Success();
+		success.setMessage("Success");
+		success.setStatus(200);
+		return success;
+	}
 }

@@ -31,6 +31,8 @@ public interface UserGroup {
 	
 	public void deleteGroupUser(@Param("group_id") int group_id, @Param("user_id") int user_id);
 	
+	public int getGroupUserId(@Param("group_id") int group_id, @Param("user_id") int user_id);
+	
 	public List<Users> getUsersByGroupID(@Param("group_id") int group_id);
 	
 	public void dogroupMatchCreation(@Param("user_group_id") int group_id, @Param("match_id") int user_id);
