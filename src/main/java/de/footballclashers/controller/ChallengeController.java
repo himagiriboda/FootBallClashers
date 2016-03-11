@@ -34,7 +34,7 @@ public class ChallengeController {
 	@RequestMapping(value="/seasonalprediction", method= RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Success setSeasonalPrediction(@RequestParam("match_id") int match_id,
 			@RequestParam("from_user_id") int from_user_id, 
-			@RequestParam("TeamA_score") int A_score, @RequestParam("TeamB_score") int B_score) {
+			@RequestParam("TeamA_score") int A_score,  @RequestParam("TeamB_score") int B_score) {
 	
 		challengeService.setSeasonalChallengePrediction(match_id, from_user_id,  A_score, B_score);
 		
