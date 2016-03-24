@@ -26,7 +26,8 @@ public class UserGroupManagerImpl implements UserGroupManager{
 	public List<GroupDetails> listOfGroupsPartOfUser(String email){
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("email",email);
-		return userGroup.listOfGroupsCreatedByUser(dataMap);
+		// return userGroup.listOfGroupsCreatedByUser(dataMap);
+		return userGroup.listOfGroupsPartOfUser(dataMap);
 	}
 	
 	public List<Users> findUsersByGroupID(int group_id){

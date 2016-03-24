@@ -56,7 +56,7 @@
 		JOIN
 		league l on l.id = ug.league_id
 		join users u on u.id = gm.user_id where
-		u.email=#{email}
+		u.email=#{email} and gm.user_id!=ug.createdBy
 	</select>
 	<select id='insertChat' parameterType="de.footballclashers.beans.GroupChat">
 		insert into
