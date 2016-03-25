@@ -11,5 +11,5 @@ public interface UsersService {
 	public List<Users> getAllUser();
 	public void doLogIn(Users usersDetails);
 	public List<Users> getAllUser(String userName);
-	public List<Users> getListOfInvitations(String email);
+	public List<Users> getListOfInvitations(int user_id);
 }

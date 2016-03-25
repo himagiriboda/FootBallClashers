@@ -14,6 +14,6 @@ public interface UsersManager {
 	public Users isCurrentPasswordExisted(Users users);
 	public Users isUSerAuth(Users users);
 	public List<Users> getAllUser(Users users);
-	public List<Users> getListOfInvitations(String email);
+	public List<Users> getListOfInvitations(int user_id);
 	
 }

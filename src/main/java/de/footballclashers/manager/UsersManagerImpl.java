@@ -63,10 +63,10 @@ public class UsersManagerImpl implements UsersManager{
 		return userMapperBasicDAO.getUserByEmail(users);
 	}
 	
-	public List<Users> getListOfInvitations(String email) {
+	public List<Users> getListOfInvitations(int user_id) {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("email",email);
-		return userMapperBasicDAO.getAllInvitations(dataMap);
+		// dataMap.put("email",email);
+		return userMapperBasicDAO.getAllInvitations(user_id);
 	}
 	
 }

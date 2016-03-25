@@ -52,9 +52,9 @@ public class UsersServiceImpl implements UsersService{
 		validationService.isUSerAuth(usersDetails);
 	}
 
-	public List<Users> getListOfInvitations(String email) {
+	public List<Users> getListOfInvitations(int user_id) {
 		
-		return usersManager.getListOfInvitations(email);
+		return usersManager.getListOfInvitations(user_id);
 	}
 
 }

@@ -36,11 +36,9 @@
 	        SELECT id,name,email,password,social_id,avatarImage,points FROM users where name = #{name,jdbcType=VARCHAR};
 	    </select>
 
-		<select id="getAllInvitations" parameterType="map" resultMap="result">
-	        select u.id,u.name from invitation i join
-user_group ug on i.user_group_id = ug.id
-join users u on u.id = ug.createdBy
-where u.email=#{email,jdbcType=VARCHAR}
+		<select id="getAllInvitations" parameterType="Integer" resultMap="result">
+	        select u.id,u.name from invitation i join user_group ug on i.user_group_id = ug.id
+join users u on u.id = ug.createdBy where i.user_id=#{user_id}
 	    </select>
 	    
 	    

@@ -72,8 +72,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/invitaions",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Users> findInvitaions(@RequestParam(value="email") String email){
-		return usersService.getListOfInvitations(email);
+	public List<Users> findInvitaions(@RequestParam(value="user_id") String user_id){
+		return usersService.getListOfInvitations(Integer.parseInt(user_id));
 	}
 	
 	@RequestMapping(value="/logIn",method=RequestMethod.POST)
