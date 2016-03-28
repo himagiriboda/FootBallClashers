@@ -93,7 +93,7 @@ public class UserGroupServiceImpl implements UserGroupService {
 	}
 
 	public List<GroupDetails> listOfGroupsPartOfUser(String Email) {
-		return userGroupManager.listOfGroupsCreatedByUser(Email);
+		return userGroupManager.listOfGroupsPartOfUser(Email);
 	}
 
 	public void addGroupChat(GroupChat group_chat) {
