@@ -2,6 +2,7 @@ package de.footballclashers.manager;
 
 import java.util.List;
 
+import de.footballclashers.beans.UserGroupDetailsBean;
 import de.footballclashers.dao.model.fbc.Users;
 
 public interface UsersManager {
@@ -14,6 +15,6 @@ public interface UsersManager {
 	public Users isCurrentPasswordExisted(Users users);
 	public Users isUSerAuth(Users users);
 	public List<Users> getAllUser(Users users);
-	public List<Users> getListOfInvitations(int user_id);
-	
+	public List<UserGroupDetailsBean> getListOfInvitations(int user_id);
+	public Users getUserByEmail(Users users);
 }

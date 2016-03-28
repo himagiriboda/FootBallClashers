@@ -36,8 +36,8 @@
 	        SELECT id,name,email,password,social_id,avatarImage,points FROM users where name = #{name,jdbcType=VARCHAR};
 	    </select>
 
-		<select id="getAllInvitations" parameterType="Integer" resultMap="result">
-	        select u.id,u.name from invitation i join user_group ug on i.user_group_id = ug.id
+		<select id="getAllInvitations" parameterType="Integer" resultType="de.footballclashers.beans.UserGroupDetailsBean">
+	        select u.id as id,u.name as name ,ug.id as group_id,ug.name as group_name from invitation i join user_group ug on i.user_group_id = ug.id
 join users u on u.id = ug.createdBy where i.user_id=#{user_id}
 	    </select>
 	    

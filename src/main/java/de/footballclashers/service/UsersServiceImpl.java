@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import de.footballclashers.beans.UserGroupDetailsBean;
 import de.footballclashers.beans.UsersDetails;
 import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.manager.UsersManager;
@@ -52,9 +53,13 @@ public class UsersServiceImpl implements UsersService{
 		validationService.isUSerAuth(usersDetails);
 	}
 
-	public List<Users> getListOfInvitations(int user_id) {
+	public List<UserGroupDetailsBean> getListOfInvitations(int user_id) {
 		
 		return usersManager.getListOfInvitations(user_id);
+	}
+
+	public Users getUserByEmail(Users user) {
+		return usersManager.getUserByEmail(user);
 	}
 
 }

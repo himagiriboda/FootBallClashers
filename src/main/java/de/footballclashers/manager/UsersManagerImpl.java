@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import de.footballclashers.beans.UsersDetails;
+import de.footballclashers.beans.UserGroupDetailsBean;
 import de.footballclashers.dao.interfaces.fbc.UserMapperBasicDAO;
 import de.footballclashers.dao.model.fbc.Users;
 
@@ -63,10 +63,14 @@ public class UsersManagerImpl implements UsersManager{
 		return userMapperBasicDAO.getUserByEmail(users);
 	}
 	
-	public List<Users> getListOfInvitations(int user_id) {
+	public List<UserGroupDetailsBean> getListOfInvitations(int user_id) {
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		// dataMap.put("email",email);
 		return userMapperBasicDAO.getAllInvitations(user_id);
+	}
+
+	public Users getUserByEmail(Users users) {
+		return userMapperBasicDAO.getUserByEmail(users);
 	}
 	
 }

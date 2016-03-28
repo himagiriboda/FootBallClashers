@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import de.footballclashers.beans.GroupDetails;
 import de.footballclashers.beans.Success;
+import de.footballclashers.beans.UserGroupDetailsBean;
+import de.footballclashers.beans.UserLoginBean;
 import de.footballclashers.beans.UsersDetails;
 import de.footballclashers.dao.interfaces.fbc.UserGroup;
 import de.footballclashers.dao.model.fbc.Users;
@@ -31,12 +34,20 @@ public class UserController {
 	private UserGroup userGroup;
 	
 	@RequestMapping(value="/user",method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE)
-	public Success userRegistration(@RequestBody Users users){
+	public UserLoginBean userRegistration(@RequestBody Users users){
 		usersService.doUserRegistration(users);
-		Success sucess = new Success();
-		sucess.setMessage("Success");
-		sucess.setStatus(200);
-		return sucess;
+		Users userDet = usersService.getUserByEmail(users);
+		
+		Success success = new Success();
+		success.setMessage("Success");
+		success.setStatus(200);
+		
+		UserLoginBean user_loginBn = new UserLoginBean();
+		userDet.setPassword(null);
+		user_loginBn.setUserDetails(userDet);
+		user_loginBn.setSuccess(success);
+		
+		return user_loginBn;
 	}
 	
 	@RequestMapping(value="/users", method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
@@ -72,20 +83,26 @@ public class UserController {
 	}
 
 	@RequestMapping(value="/invitaions",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Users> findInvitaions(@RequestParam(value="user_id") String user_id){
+	public List<UserGroupDetailsBean> findInvitaions(@RequestParam(value="user_id") String user_id){
 		return usersService.getListOfInvitations(Integer.parseInt(user_id));
 	}
 	
 	@RequestMapping(value="/logIn",method=RequestMethod.POST)
-	public Success doLogIn(@RequestParam(value="email") String email,@RequestParam(value="password") String password){
+	public UserLoginBean doLogIn(@RequestParam(value="email") String email,@RequestParam(value="password") String password){
 		Users usersDetails = new Users();
 		usersDetails.setEmail(email);
 		usersDetails.setPassword(password);
 		usersService.doLogIn(usersDetails);
+		Users userDet = usersService.getUserByEmail(usersDetails);
+		
 		Success success = new Success();
 		success.setMessage("Sucess");
 		success.setStatus(200);
-		return success;
+		UserLoginBean user_loginBn = new UserLoginBean();
+		userDet.setPassword(null);
+		user_loginBn.setUserDetails(userDet);
+		user_loginBn.setSuccess(success);
+		return user_loginBn;
 	}
 	
 }
