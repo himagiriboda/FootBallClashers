@@ -10,6 +10,7 @@ public interface UsersManager {
 	public void doForGotPassword(String email);
 	public void doChangePassword(String email,String current,String newPassword);
 	public List<Users> getAllUser();
+	public Users getUserById(int id);
 	public boolean isEmailAlreadyExisted(Users users);
 	public Users isUserRegisteredWithSocialID(Users users);
 	public Users isCurrentPasswordExisted(Users users);

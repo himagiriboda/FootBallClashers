@@ -18,6 +18,8 @@ public interface UserMapperBasicDAO {
 	
 	public List<Users> getAllUserByName(String name);
 	
+	public Users getuserById(int id);
+	
 	public Users getUserByEmail(Users usersDetails);
 	
 	public List<UserGroupDetailsBean> getAllInvitations(@Param("user_id")int user_id);

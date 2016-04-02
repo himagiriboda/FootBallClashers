@@ -28,6 +28,10 @@
 	        SELECT id,name,email,password,social_id,avatarImage,points FROM users;
 	    </select>
 	    
+	    <select id="getuserById" parameterType="int" resultMap="result">
+	        SELECT *FROM users where id=#{id};
+	    </select>
+	    
 	    <select id="getUserByEmail" parameterType="de.footballclashers.dao.model.fbc.Users" resultMap="result">
 	        SELECT id,name,email,password,social_id,avatarImage,points FROM users where email = #{email,jdbcType=VARCHAR};
 	    </select>

@@ -18,6 +18,8 @@ import de.footballclashers.dao.model.fbc.Users;
 public class UserGroupManagerImpl implements UserGroupManager{
 	@Autowired
 	private UserGroup userGroup;
+	@Autowired
+	private UsersManagerImpl userManagerImpl;
 	public List<GroupDetails> listOfGroupsCreatedByUser(String email){
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("email",email);
@@ -26,8 +28,12 @@ public class UserGroupManagerImpl implements UserGroupManager{
 	public List<GroupDetails> listOfGroupsPartOfUser(String email){
 		Map<String, Object> dataMap = new HashMap<String, Object>();
 		dataMap.put("email",email);
+		List<GroupDetails> grpDetails = userGroup.listOfGroupsPartOfUser(dataMap);
+		for(GroupDetails grpDet : grpDetails) {
+			grpDet.setGroupByOwnerName(userManagerImpl.getUserById(grpDet.getCreatedBy()).getName());
+		}
 		// return userGroup.listOfGroupsCreatedByUser(dataMap);
-		return userGroup.listOfGroupsPartOfUser(dataMap);
+		return grpDetails;
 	}
 	
 	public List<Users> findUsersByGroupID(int group_id){

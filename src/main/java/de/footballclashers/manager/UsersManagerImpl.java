@@ -72,5 +72,9 @@ public class UsersManagerImpl implements UsersManager{
 	public Users getUserByEmail(Users users) {
 		return userMapperBasicDAO.getUserByEmail(users);
 	}
+
+	public Users getUserById(int id) {
+		return userMapperBasicDAO.getuserById(id);
+	}
 	
 }
