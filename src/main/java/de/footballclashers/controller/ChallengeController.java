@@ -1,14 +1,20 @@
 package de.footballclashers.controller;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.footballclashers.beans.Challenge;
 import de.footballclashers.beans.Success;
+import de.footballclashers.dao.interfaces.fbc.Prediction;
+import de.footballclashers.dao.model.fbc.Users;
 import de.footballclashers.service.ChallengeServiceImpl;
 
 @RestController
@@ -17,6 +23,8 @@ public class ChallengeController {
 
 	@Autowired
 	private ChallengeServiceImpl challengeService;
+	@Autowired
+	private Prediction prediction;
 	
 	@RequestMapping(value="/prediction", method= RequestMethod.POST, consumes=MediaType.APPLICATION_JSON_VALUE)
 	public Success setPrediction(@RequestParam("match_id") int match_id,
@@ -38,6 +46,23 @@ public class ChallengeController {
 	
 		challengeService.setSeasonalChallengePrediction(match_id, from_user_id,  A_score, B_score);
 		
+		Success success = new Success();
+		success.setMessage("Success");
+		success.setStatus(200);
+		return success;
+	}
+	
+	@RequestMapping(value="/ListOfChallenges",produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<de.footballclashers.beans.Challenge> findByListOfChallenges(@RequestParam(value="user_id") int user_id){
+		return challengeService.findByListOfChallenges(user_id);
+	}
+	
+	@RequestMapping(value="/AcceptChallenge")
+	public Success doAcceptChallenge(@RequestParam("match_id") int match_id,
+			@RequestParam("from_user_id") int from_user_id, @Param("challenge_id") int challenge_id,
+			@RequestParam("TeamA_score") int A_score, @RequestParam("TeamB_score") int B_score){
+		challengeService.acceptChallenge(challenge_id);
+		prediction.insertChallengePrediction(challenge_id, from_user_id, match_id, A_score, B_score);
 		Success success = new Success();
 		success.setMessage("Success");
 		success.setStatus(200);

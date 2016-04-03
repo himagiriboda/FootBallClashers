@@ -7,4 +7,19 @@
 	insert into challenge (match_id,from_user_id,to_user_id) values 
 	(#{match_id},#{from_user_id},#{to_user_id})
 </insert>
+
+<resultMap id="result" type="de.footballclashers.beans.Challenge">
+		<result property="id" column="id" />
+		<result property="match_id" column="match_id" />
+		<result property="from_user_id" column="from_user_id" />
+		<result property="to_user_id" column="to_user_id" />
+	</resultMap>
+	
+	<select id="findByListOfChallenges" parameterType="int" resultMap="result">
+		select c.id,c.match_id,c.from_user_id,c.to_user_id from FootBallClashers.challenge c where c.to_user_id=#{user_id} and status=0;
+	</select>
+	
+	<select id="update" parameterType="int">
+		update challenge set status=1 where id=#{id};
+	</select>
 </mapper>

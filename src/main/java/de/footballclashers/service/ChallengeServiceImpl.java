@@ -1,6 +1,7 @@
 package de.footballclashers.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,16 @@ public class ChallengeServiceImpl implements ChallengeService {
 			int TeamA_score, int TeamB_score) {
 
 		prediction.insertSeasonalPrediction(from_user_id, match_id, TeamA_score, TeamB_score);
+		
+	}
+	
+	public List<de.footballclashers.beans.Challenge> findByListOfChallenges(Integer user_id){
+		return challenge.findByListOfChallenges(user_id);
+		
+	}
+	
+	public void acceptChallenge(int id){
+		challenge.update(id);
 		
 	}
 
