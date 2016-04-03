@@ -85,7 +85,7 @@ public class UserGroupController {
 		return success;
 	}
 
-	@RequestMapping(value = "/deleteUserFromGroup", method = RequestMethod.DELETE,consumes = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/deleteUserFromGroup", method = RequestMethod.POST,consumes = MediaType.APPLICATION_JSON_VALUE)
 	public Success deleteUserFromGroup(
 			@RequestParam(value = "userId") int userId,
 			@RequestParam(value = "groupId") int groupId) {
