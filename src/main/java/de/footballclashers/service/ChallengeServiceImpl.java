@@ -1,12 +1,16 @@
 package de.footballclashers.service;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import de.footballclashers.beans.LeagueDetails;
+import de.footballclashers.beans.MatchesDetails;
+import de.footballclashers.beans.TeamDetails;
 import de.footballclashers.dao.interfaces.fbc.Challenge;
 import de.footballclashers.dao.interfaces.fbc.Prediction;
 
@@ -44,6 +48,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 	}
 	
 	public List<de.footballclashers.beans.Challenge> findByListOfChallenges(Integer user_id){
+		
 		return challenge.findByListOfChallenges(user_id);
 		
 	}
@@ -52,5 +57,34 @@ public class ChallengeServiceImpl implements ChallengeService {
 		challenge.update(id);
 		
 	}
-
+	
+	public HashMap<Integer,TeamDetails> findByTeamDetails(){
+		List<TeamDetails> teamData = challenge.findByTeamDetails();
+		HashMap<Integer,TeamDetails> map = new HashMap<Integer,TeamDetails>();
+		if(teamData != null && !teamData.isEmpty()){
+			for(Iterator<TeamDetails> it = teamData.iterator() ; it.hasNext() ;){
+				TeamDetails teamDetails = it.next();
+				map.put(teamDetails.getId(), teamDetails);
+			}
+		}
+		return map;
+	}
+	
+    public LeagueDetails findByLeagueDetails(){
+    	
+    	LeagueDetails l = new LeagueDetails();
+    	HashMap<Integer,TeamDetails> map = findByTeamDetails();
+    	List<MatchesDetails> matchesDetails = challenge.findByMatchesDetails();
+    	if(matchesDetails != null && !matchesDetails.isEmpty()){
+    		for(Iterator<MatchesDetails> it = matchesDetails.iterator() ; it.hasNext();){
+    			MatchesDetails matchesDetails2 = it.next();
+    			TeamDetails teamA = map.get(matchesDetails2.getTeamA());
+    			matchesDetails2.setTeamAName(teamA.getName());
+    			TeamDetails teamB = map.get(matchesDetails2.getTeamB());
+    			matchesDetails2.setTeamBName(teamB.getName());
+    			l.getMatchesDetails().add(matchesDetails2);
+    		}
+    	}
+    	return l;
+    }
 }

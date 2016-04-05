@@ -1,46 +1,16 @@
 package de.footballclashers.beans;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class LeagueDetails {
 	
-	private String name;
-	private Date startTime;
-	private Date endTime;
-	private Byte status;
-	private MatchesDetails matchesDetails;
 	
-	public MatchesDetails getMatchesDetails() {
+	private List<MatchesDetails> matchesDetails = new ArrayList<MatchesDetails>();
+	
+	public List<MatchesDetails> getMatchesDetails() {
 		return matchesDetails;
 	}
-	public void setMatchesDetails(MatchesDetails matchesDetails) {
-		this.matchesDetails = matchesDetails;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Date getStartTime() {
-		return startTime;
-	}
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-	public Date getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-	public Byte getStatus() {
-		return status;
-	}
-	public void setStatus(Byte status) {
-		this.status = status;
-	}
-	
-	
 	
 }
