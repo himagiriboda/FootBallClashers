@@ -66,7 +66,7 @@
 
 	<select id="groupChatList" parameterType="int"
 		resultType="de.footballclashers.beans.GroupChat">
-		select name as username ,message,x.last_updated as
+		select user_id,name as username ,message,x.last_updated as
 		last_updated from
 		group_chat as x left join users as y on
 		x.user_id=y.id where x.user_group_id=#{group_id} order by last_updated
