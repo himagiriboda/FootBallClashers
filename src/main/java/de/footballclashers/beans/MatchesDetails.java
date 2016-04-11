@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class MatchesDetails {
 	
 	private Integer leagueId;
+	private Integer matchId;
 	private String leagueName;
 	private Integer teamA;
 	private String teamAName;
@@ -17,6 +18,8 @@ public class MatchesDetails {
 	private Integer teamAScore;
 	private Integer teamBScore;
 	private Date matchTime;
+	private Integer groupID;
+	private String groupName;
 	
 	public Integer getLeagueId() {
 		return leagueId;
@@ -71,6 +74,24 @@ public class MatchesDetails {
 	}
 	public void setTeamBName(String teamBName) {
 		this.teamBName = teamBName;
+	}
+	public Integer getGroupID() {
+		return groupID;
+	}
+	public void setGroupID(Integer groupID) {
+		this.groupID = groupID;
+	}
+	public String getGroupName() {
+		return groupName;
+	}
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+	public Integer getMatchId() {
+		return matchId;
+	}
+	public void setMatchId(Integer matchId) {
+		this.matchId = matchId;
 	}
 	
 	
