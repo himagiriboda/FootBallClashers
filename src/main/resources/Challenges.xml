@@ -8,15 +8,24 @@
 	(#{match_id},#{from_user_id},#{to_user_id})
 </insert>
 
-<resultMap id="result" type="de.footballclashers.beans.Challenge">
+	<resultMap id="result" type="de.footballclashers.beans.Challenge">
 		<result property="id" column="id" />
 		<result property="match_id" column="match_id" />
 		<result property="from_user_id" column="from_user_id" />
 		<result property="to_user_id" column="to_user_id" />
+		<result property="status" column="status" />
+		<result property="name" column="name" />
 	</resultMap>
 	
 	<select id="findByListOfChallenges" parameterType="int" resultMap="result">
 		select c.id,c.match_id,c.from_user_id,c.to_user_id from FootBallClashers.challenge c where c.to_user_id=#{user_id} and status=0;
+	</select>
+	
+	<select id="findByListOfChallengesPartOfUser" parameterType="int" resultMap="result">
+		select c.id as id,c.match_id as match_id,c.from_user_id as from_user_id,c.to_user_id as to_user_id,c.status as status,u.name as name from 
+FootBallClashers.challenge c 
+join FootBallClashers.users u on u.id=c.to_user_id
+where c.from_user_id=#{user_id};
 	</select>
 	
 	<select id="update" parameterType="int">

@@ -67,4 +67,29 @@ public class UserGroupManagerImpl implements UserGroupManager{
     	}
     	return list;
     }
+    
+    public List<MatchesDetails> findByListOfMatchesDetails(){
+    	List<MatchesDetails> list = userGroup.findByListOfAllMatchesDetails();
+    	if(list != null && !list.isEmpty()){
+    		for(Iterator<MatchesDetails> it = list.iterator();it.hasNext();){
+    			MatchesDetails matchesDetails = it.next();
+    			if(matchesDetails != null){
+    				List<TeamDetails> data = userGroup.findMatchDetilsByIDs(matchesDetails.getTeamA(), matchesDetails.getTeamB());
+    				if(data != null && !data.isEmpty()){
+    					for(Iterator<TeamDetails> its = data.iterator() ; its.hasNext() ;){
+    						TeamDetails teamDetails = its.next();
+    						if(teamDetails != null){
+    							if(teamDetails.getId() == matchesDetails.getTeamA()){
+    								matchesDetails.setTeamAName(teamDetails.getName());
+    							}else if(teamDetails.getId() == matchesDetails.getTeamB()){
+    								matchesDetails.setTeamBName(teamDetails.getName());
+    							}
+    						}
+    					}
+    				}
+    			}
+    		}
+    	}
+    	return list;
+    }
 }

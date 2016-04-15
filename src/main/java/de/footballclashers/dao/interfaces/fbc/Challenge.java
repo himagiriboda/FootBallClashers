@@ -12,6 +12,7 @@ public interface Challenge {
 	
 	public int setChallenge(Map<String,Object> challengeMap);
 	public List<de.footballclashers.beans.Challenge> findByListOfChallenges(@Param("user_id") int user_id);
+	public List<de.footballclashers.beans.Challenge> findByListOfChallengesPartOfUser(@Param("user_id") int user_id);
 	public void update(@Param("id") int id);
 	public List<TeamDetails> findByTeamDetails();
 	public List<MatchesDetails> findByMatchesDetails();

@@ -133,6 +133,12 @@ public class UserGroupController {
 		
 	}
 	
+	@RequestMapping(value="/allMatchesDetails",produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<MatchesDetails> findByListOfAllMatchesDetails(){
+		return userGrpSrvcImpl.findByListOfMatchesDetails();
+		
+	}
+	
 	@RequestMapping(value="/groupPrediction", produces= MediaType.APPLICATION_JSON_VALUE)
 	public Success ScorePrediction(@RequestParam("group_id") int group_id, @RequestParam("user_id") int user_id,
 			@RequestParam("match_id") int match_id, @RequestParam("TeamA_score") int A_score,

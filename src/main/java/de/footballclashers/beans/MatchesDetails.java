@@ -2,6 +2,7 @@ package de.footballclashers.beans;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -17,7 +18,10 @@ public class MatchesDetails {
 	private String teamBName;
 	private Integer teamAScore;
 	private Integer teamBScore;
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm a z")
 	private Date matchTime;
+	
 	private Integer groupID;
 	private String groupName;
 	

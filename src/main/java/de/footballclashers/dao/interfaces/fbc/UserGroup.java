@@ -39,5 +39,7 @@ public interface UserGroup {
 	
 	public List<MatchesDetails> findByListOfMatchesDetails(@Param("group_id") int group_id);
 	
+	public List<MatchesDetails> findByListOfAllMatchesDetails();
+	
 	public List<TeamDetails> findMatchDetilsByIDs(@Param("teamA") int teamA,@Param("teamB") int teamB);
 }

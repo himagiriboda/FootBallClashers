@@ -53,6 +53,11 @@ public class ChallengeController {
 		return challengeService.findByListOfChallenges(user_id);
 	}
 	
+	@RequestMapping(value="/ListOfChallengesPartOfUser",produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<de.footballclashers.beans.Challenge> findByListOfChallengesPartOfUser(@RequestParam(value="user_id") int user_id){
+		return challengeService.findByListOfChallengesPartOfUser(user_id);
+	}
+	
 	@RequestMapping(value="/AcceptChallenge")
 	public Success doAcceptChallenge(@RequestParam("match_id") int match_id,
 			@RequestParam("from_user_id") int from_user_id, @Param("challenge_id") int challenge_id,

@@ -53,6 +53,13 @@ public class ChallengeServiceImpl implements ChallengeService {
 		
 	}
 	
+	public List<de.footballclashers.beans.Challenge> findByListOfChallengesPartOfUser(Integer user_id){
+		
+		return challenge.findByListOfChallengesPartOfUser(user_id);
+		
+	}
+	
+	
 	public void acceptChallenge(int id){
 		challenge.update(id);
 		

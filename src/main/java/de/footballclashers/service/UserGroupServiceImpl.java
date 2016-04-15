@@ -138,6 +138,10 @@ public class UserGroupServiceImpl implements UserGroupService {
 	public List<MatchesDetails> findByListOfMatchesDetails(int group_id){
 		return userGroupManager.findByListOfMatchesDetails(group_id);
 	}
+	
+	public List<MatchesDetails> findByListOfMatchesDetails(){
+		return userGroupManager.findByListOfMatchesDetails();
+	}
 
 	public void setPrediction(int group_id, int user_id, int match_id,
 			int TeamA_score, int TeamB_score) {

@@ -108,8 +108,19 @@
 		from matches m 
 		join league l on l.id = m.league_id
 		join FootBallClashers.user_group ug on ug.league_id = l.id
-		where ug.id=#{group_id}
+		where ug.id=#{group_id} and l.end_time>now();
 	</select>
+	
+	<select id="findByListOfAllMatchesDetails" parameterType="int"
+		resultMap="result2">
+		select l.id as leagueId ,l.name as leagueName,m.id as matchId,m.Team_A as teamA ,m.Team_A_score as teamAScore,
+		m.Team_B as teamB,m.Team_B_score as teamBScore,m.match_time as
+		matchTime
+		from matches m 
+		join league l on l.id = m.league_id
+		where l.end_time>now();
+	</select>
+	
 
 	<resultMap id="result2" type="de.footballclashers.beans.MatchesDetails">
 	    <result property="leagueId" column="leagueId" />
