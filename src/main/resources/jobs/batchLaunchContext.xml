@@ -25,6 +25,13 @@
 	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
 		<property name="jobRepository" ref="jobRepository" />
 	</bean>
+	
+	<bean class="org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor">
+		<property name="jobRegistry" ref="jobRegistry" />
+  	</bean>
+
+	<bean id="jobRegistry" class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
+	
 	<jdbc:initialize-database data-source="dataSource" enabled="false">
 		<jdbc:script location="classpath:/org/springframework/batch/core/schema-mysql.sql" />
 	</jdbc:initialize-database>
