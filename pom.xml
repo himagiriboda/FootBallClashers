@@ -17,7 +17,6 @@
 		<spring.test.version>4.2.6.RELEASE</spring.test.version>
 		<quartz.version>2.2.1</quartz.version>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.ning</groupId>
